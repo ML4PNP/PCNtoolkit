@@ -58,11 +58,43 @@ DEFAULT_PRIOR_ARGS = {
 
 
 def make_prior(name: str = "theta", **kwargs) -> BasePrior:
+    """Build a prior from keyword arguments.
+
+    Parameters
+    ----------
+    name : str
+        Name of the prior.
+    linear : bool
+        Build a `LinearPrior` (a slope/intercept pair through a basis function).
+    random : bool
+        Build a random-effect prior, i.e. a per-batch-effect offset around a
+        shared mean.
+    centered : bool
+        Only meaningful together with `random`. Selects how the random effect is
+        parameterised - the two forms describe the same model but give the
+        samplers different geometry:
+
+        - `False` (default) - **non-centered**: the offsets are drawn at unit
+          scale and multiplied by the group scale,
+          `offset = sigma * ZeroSumNormal(1)`. This is the standard choice for
+          NUTS, which mixes better when the scale and the offsets are a priori
+          independent.
+        - `True` - **centered**: the offsets are drawn directly at the group
+          scale, `offset ~ ZeroSumNormal(sigma)`. Prefer this for
+          mode-based approximations (`inference_method="laplace"`), which are
+          biased by the funnel the non-centered form creates: there the scale
+          and the offsets it multiplies are only jointly identified, so the
+          posterior mode sits far from the posterior mass.
+
+        The right choice therefore depends on the inference method rather than
+        on the data, which is why it is exposed rather than fixed.
+    """
     kwargs["name"] = name
+    centered = kwargs.pop("centered", False)
     if kwargs.pop("linear", False):
         return LinearPrior(**kwargs)
     elif kwargs.pop("random", False):
-        return RandomPrior(**kwargs)
+        return CenteredRandomPrior(**kwargs) if centered else RandomPrior(**kwargs)
     else:
         return Prior(**kwargs)
 
@@ -98,7 +130,10 @@ def prior_from_args(name: str, args: Dict[str, Any], dims: Optional[Union[Tuple[
     elif my_args.get(f"random_{name}", False):
         mu = prior_from_args(f"mu_{name}", my_args, dims=dims)
         sigma = prior_from_args(f"sigma_{name}", my_args, dims=dims)
-        return RandomPrior(mu=mu, sigma=sigma, name=name, dims=dims, mapping=mapping, mapping_params=mapping_params)
+        # `centered_<name>` picks the parameterisation of the random effect; see
+        # `make_prior` for what the two forms mean and when each is preferable.
+        cls = CenteredRandomPrior if my_args.get(f"centered_{name}", False) else RandomPrior
+        return cls(mu=mu, sigma=sigma, name=name, dims=dims, mapping=mapping, mapping_params=mapping_params)
     else:
         return Prior(
             name=name, dims=dims, mapping=mapping, mapping_params=mapping_params, dist_name=dist_name, dist_params=dist_params
@@ -476,10 +511,12 @@ class CenteredRandomPrior(BasePrior):
             self.dist = acc
         return self.dist
 
-    def transfer(self, idata: xr.DataTree, **kwargs) -> "RandomPrior":
+    def transfer(self, idata: xr.DataTree, **kwargs) -> "CenteredRandomPrior":
         new_mu = self.mu.transfer(idata, **kwargs)
         new_sigma = copy.deepcopy(self.sigma)
-        new_prior = RandomPrior(
+        # Must stay centered: transferring into a RandomPrior would silently
+        # switch the model to the non-centered parameterisation.
+        new_prior = CenteredRandomPrior(
             name=self.name, dims=self.dims, mapping=self.mapping, mapping_params=self.mapping_params, mu=new_mu, sigma=new_sigma
         )
         for be_i in self.sigmas.keys():

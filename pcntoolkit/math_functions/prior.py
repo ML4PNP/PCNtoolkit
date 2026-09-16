@@ -90,6 +90,7 @@ def make_prior(name: str = "theta", **kwargs) -> BasePrior:
         on the data, which is why it is exposed rather than fixed.
     """
     kwargs["name"] = name
+    # Extract the 'centered' flag from the keyword arguments, defaulting to False.
     centered = kwargs.pop("centered", False)
     if kwargs.pop("linear", False):
         return LinearPrior(**kwargs)

@@ -13,9 +13,9 @@ from __future__ import annotations
 import copy
 import json
 import os
+import warnings
 from collections import defaultdict
 from functools import reduce
-import warnings
 
 # pylint: disable=deprecated-class
 from typing import (
@@ -36,7 +36,7 @@ import numpy as np
 import pandas as pd  # type: ignore
 import xarray as xr
 from numpy.typing import ArrayLike
-from scipy import stats
+from pandas.core.groupby.generic import SeriesGroupBy
 from sklearn.model_selection import StratifiedKFold, train_test_split  # type: ignore
 
 # import datavars from xarray
@@ -46,6 +46,10 @@ from filelock import FileLock
 
 from pcntoolkit.dataio.fileio import load
 from pcntoolkit.util.output import Messages, Output, Warnings
+
+# Quartiles defining the interquartile range used by Tukey's fences.
+Q1_QUANTILE = 0.25
+Q3_QUANTILE = 0.75
 
 
 class NormData(xr.Dataset):
@@ -153,8 +157,9 @@ class NormData(xr.Dataset):
         remove_outliers: bool = False,
         z_threshold: float = 3.0,
         remove_Nan: bool = False,
-        remove_outliers_approach: str | None = None,
+        remove_outliers_approach: str = "z-score",
         remove_outliers_group_by: List[str] | None = None,
+        iqr_factor: float = 1.5,
     ) -> NormData:
         """Create a NormData object from numpy arrays via DataFrame conversion.
 
@@ -200,6 +205,7 @@ class NormData(xr.Dataset):
             remove_Nan=remove_Nan,
             remove_outliers_approach=remove_outliers_approach,
             remove_outliers_group_by=remove_outliers_group_by,
+            iqr_factor=iqr_factor,
         )
 
     @classmethod
@@ -318,8 +324,9 @@ class NormData(xr.Dataset):
         remove_outliers: bool = False,
         z_threshold: float = 3.0,
         attrs: Mapping[str, Any] | None = None,
-        remove_outliers_approach: str | None = None,
+        remove_outliers_approach: str = "z-score",
         remove_outliers_group_by: List[str] | None = None,
+        iqr_factor: float = 1.5,
     ) -> NormData:
         """
         Load a normative dataset from a pandas DataFrame.
@@ -351,20 +358,24 @@ class NormData(xr.Dataset):
             Whether to remove outliers from the covariates and response
             variables. By default False.
         z_threshold : float, optional
-            The outlier removal threshold, by default 3.0. For "z-score" this is
-            the number of standard deviations; for "iqr" it is the multiplier k
-            of Tukey's fences (conventionally 1.5).
-        remove_outliers_approach : str | None, optional
+            The number of standard deviations from the group mean beyond which a
+            value is an outlier. Used only when ``remove_outliers_approach`` is
+            "z-score". By default 3.0.
+        remove_outliers_approach : str, optional
             The rule used to flag outliers when ``remove_outliers`` is True,
-            either "z-score" or "iqr" (Tukey's fences). If None, "z-score" is
-            used and a warning is raised, since z-scores assume roughly
-            Gaussian data. By default None.
+            either "z-score" or "iqr" (Tukey's fences). By default "z-score".
+            Note that z-scores assume roughly Gaussian data; for skewed or
+            heavy-tailed data prefer "iqr".
         remove_outliers_group_by : List[str] | None, optional
             The columns defining the groups within which the outlier thresholds
             are computed, e.g. ["site"]. Several columns can be combined into a
-            single grouping. If None, the thresholds are computed
-            across all rows and a warning is raised, since site differences are
-            then ignored. By default None.
+            single grouping. If None, the thresholds are computed across all rows 
+            and a warning is raised, since site differences are then ignored. 
+            By default None.
+        iqr_factor : float, optional
+            The multiplier k of Tukey's fences, Q1 - k*IQR and Q3 + k*IQR. Used
+            only when ``remove_outliers_approach`` is "iqr". By default 1.5, the
+            conventional fence.
 
         Returns
         -------
@@ -373,6 +384,7 @@ class NormData(xr.Dataset):
         """
 
         all_colums = []
+        continuous_vars: List[str] = []
         if covariates:
             all_colums += covariates
         if response_vars:
@@ -384,6 +396,26 @@ class NormData(xr.Dataset):
             all_colums += [subject_ids]
         if visits:
             all_colums += [visits]
+
+        # Check that the grouping columns for outlier removal select by the user 
+        # actually exist in the data.
+        if remove_outliers and remove_outliers_group_by:
+            missing = [c for c in remove_outliers_group_by if c not in dataframe.columns]
+            if missing:
+                raise ValueError(
+                    f"Your selected remove_outliers_group_by columns: {missing}, are not found in the dataframe. "
+                    f"Available columns: {list(dataframe.columns)}."
+                )
+            undeclared = [c for c in remove_outliers_group_by if c not in all_colums]
+            if undeclared:
+                raise ValueError(
+                    f"Your selected remove_outliers_group_by columns {undeclared} are present in the data "
+                    f"but were not declared as covariates, response_vars, batch_effects, "
+                    f"subject_ids or visits when creating the NormData. Declare them as batch effects."
+                )
+
+        # Drop all columns that are not in all_colums (e.g., columns not declared as 
+        # covariates, response_vars, batch_effects, subject_ids, or visits).
         dataframe = dataframe[all_colums]
         if remove_Nan:
             dataframe = cls.remove_nan(dataframe)
@@ -397,6 +429,7 @@ class NormData(xr.Dataset):
                 z_threshold=z_threshold,
                 approach=remove_outliers_approach,
                 group_by=remove_outliers_group_by,
+                iqr_factor=iqr_factor,
             )
 
         data_vars = {}
@@ -477,8 +510,9 @@ class NormData(xr.Dataset):
         dataframe: pd.DataFrame,
         continuous_vars: List[str],
         z_threshold: float = 3.0,
-        approach: str | None = "z-score",
+        approach: str = "z-score",
         group_by: List[str] | None = None,
+        iqr_factor: float = 1.5,
     ) -> pd.DataFrame:
         """
         Remove outliers from the dataframe.
@@ -490,35 +524,37 @@ class NormData(xr.Dataset):
         continuous_vars : List[str]
             The columns to screen for outliers.
         z_threshold : float, optional
-            The outlier removal threshold, by default 3.0. For "iqr" this is the
-            multiplier k of Tukey's fences. A value of 0.0 disables removal.
-        approach : str | None, optional
-            Either "z-score" or "iqr" (Tukey's fences). If None, "z-score" is
-            used and a warning is raised. By default "z-score".
+            The number of standard deviations from the group mean beyond which a
+            value is an outlier. Used only when ``approach`` is "z-score". By default 3.0.
+        approach : str, optional
+            Either "z-score" or "iqr" (Tukey's fences). By default "z-score".
         group_by : List[str] | None, optional
             Columns defining the groups within which the thresholds are computed,
             e.g. ["site"]. If None, they are computed across all rows and a
             warning is raised. By default None.
+        iqr_factor : float, optional
+            The multiplier k of Tukey's fences, Q1 - k*IQR and Q3 + k*IQR. Used
+            only when ``approach`` is "iqr". By default 1.5.
 
         Returns
         -------
         pd.DataFrame
             The dataframe with the outlying rows removed.
-        """
 
-        if z_threshold == 0.0:
+        Raises
+        ------
+        ValueError
+            If ``approach`` is not a string, or is neither "z-score" nor "iqr".
+        """
+        if not isinstance(approach, str):
+            raise ValueError(f"approach must be a string, got {type(approach).__name__}. Use 'z-score' or 'iqr'.")
+        if approach not in ("z-score", "iqr"):
+            raise ValueError(f"Unknown outlier removal approach '{approach}'. Use 'z-score' or 'iqr'.")
+
+        # If z = 0 then no outliers are removed.
+        if approach == "z-score" and z_threshold == 0.0:
             return dataframe
-        
-        if approach is None:
-            approach = "z-score"
-            warnings.warn(
-            "No outlier removal approach was set, so z-score based outlier removal "
-            "is used. This assumes the data are roughly Gaussian; for skewed or "
-            "heavy-tailed data, consider remove_outliers_approach='iqr'.",
-            UserWarning,
-            stacklevel=2,
-            )
-                
+
         if not group_by:
             warnings.warn(
                 "No grouping was set for outlier removal, so thresholds are computed "
@@ -528,12 +564,9 @@ class NormData(xr.Dataset):
                 stacklevel=2,
             )
 
-        approach = approach.lower()
-        if approach not in ("z-score", "iqr"):
-            raise ValueError(f"Unknown outlier removal approach '{approach}'. Use 'z-score' or 'iqr'.")
-
+        # Group all the batch effects
         if group_by:
-            grouping = dataframe[group_by].astype(str).agg("_".join, axis=1)
+            grouping: Any = [dataframe[col] for col in group_by]
         else:
             grouping = pd.Series("all", index=dataframe.index)
 
@@ -543,7 +576,7 @@ class NormData(xr.Dataset):
             if approach == "z-score":
                 outliers = cls.zscore_outliers(grouped, z_threshold)
             else:
-                outliers = cls.iqr_outliers(grouped, z_threshold)
+                outliers = cls.iqr_outliers(grouped, iqr_factor)
             outliers = outliers.fillna(False)
             if outliers.sum() > 0:
                 Output.print(f"Removed {outliers.sum()} outliers for {covar}")
@@ -553,23 +586,50 @@ class NormData(xr.Dataset):
         return dataframe.loc[keep]
 
     @staticmethod
-    def zscore_outliers(grouped, z_threshold: float) -> pd.Series:
+    def zscore_outliers(grouped: SeriesGroupBy, z_threshold: float) -> pd.Series:
         """
         Flag values more than z_threshold standard deviations from the group mean.
         Suitable for Gaussian-distributed data.
+
+        Parameters
+        ----------
+        grouped : SeriesGroupBy
+            The batch effects to group
+        z_threshold : float
+            The number of standard deviations beyond which a value is an outlier.
+
+        Returns
+        -------
+        pd.Series
+            Boolean mask, True where the value is an outlier. 
+            NaN where the group's standard deviation is zero.
         """
         mean = grouped.transform("mean")
+        # Replace zero standard deviations with NaN to avoid division by zero.
         std = grouped.transform("std", ddof=0).replace(0.0, np.nan)
         return ((grouped.obj - mean) / std).abs() > z_threshold
 
     @staticmethod
-    def iqr_outliers(grouped, iqr_factor: float) -> pd.Series:
+    def iqr_outliers(grouped: SeriesGroupBy, iqr_factor: float) -> pd.Series:
         """
         Flag values outside the group's Tukey fences, Q1 - k*IQR and Q3 + k*IQR.
         Suitable for non-Gaussian distributed data.
+
+        Parameters
+        ----------
+        grouped : SeriesGroupBy
+            The batch effects to group
+        iqr_factor : float
+            The multiplier k of the fences. 1.5 is conventional.
+
+        Returns
+        -------
+        pd.Series
+            Boolean mask, True where the value is an outlier. 
+            Groups with zero IQR flag nothing.
         """
-        q1 = grouped.transform("quantile", 0.25)
-        q3 = grouped.transform("quantile", 0.75)
+        q1 = grouped.transform("quantile", Q1_QUANTILE)
+        q3 = grouped.transform("quantile", Q3_QUANTILE)
         iqr = q3 - q1
         return (grouped.obj < q1 - iqr_factor * iqr) | (grouped.obj > q3 + iqr_factor * iqr)
 

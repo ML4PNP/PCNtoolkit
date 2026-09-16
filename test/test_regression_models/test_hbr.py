@@ -106,8 +106,13 @@ def test_hbr_to_and_from_dict_and_args(sample_args, args):
     assert args.get("linear_mu", False) == (hbr_dict["likelihood"]["mu"]["type"] == "LinearPrior")
     if args.get("linear_mu", False):
         assert hbr_dict["likelihood"]["mu"]["type"] == "LinearPrior"
-        assert (hbr_dict["likelihood"]["mu"]["slope"]["type"] == "RandomPrior") == args.get("random_slope_mu", False)
-        assert (hbr_dict["likelihood"]["mu"]["intercept"]["type"] == "RandomPrior") == args.get("random_intercept_mu", False)
+        # A centered random effect serializes under its own type name.
+        expected_slope_type = "CenteredRandomPrior" if args.get("centered_slope_mu", False) else "RandomPrior"
+        expected_intercept_type = "CenteredRandomPrior" if args.get("centered_intercept_mu", False) else "RandomPrior"
+        assert (hbr_dict["likelihood"]["mu"]["slope"]["type"] == expected_slope_type) == args.get("random_slope_mu", False)
+        assert (hbr_dict["likelihood"]["mu"]["intercept"]["type"] == expected_intercept_type) == args.get(
+            "random_intercept_mu", False
+        )
     assert hbr.is_from_dict
     assert hbr_dict["likelihood"]["sigma"]["type"] == "LinearPrior"
 

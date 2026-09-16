@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import numpy as np
 import pytest
 
+from pcntoolkit.dataio.norm_data import NormData
 from pcntoolkit.longitudinal_score.longitudinal_score import LongitudinalScore
 
 
@@ -27,6 +29,22 @@ def test_check_is_longitudinal_visit_rules(
             LongitudinalScore._check_is_longitudinal(data)
     else:
         LongitudinalScore._check_is_longitudinal(data)
+
+
+def test_get_visits_requires_visits_on_norm_data(longitudinal_dataframe):
+    data = NormData.from_dataframe(
+        "longitudinal",
+        longitudinal_dataframe,
+        covariates=["age"],
+        batch_effects=["site", "sex"],
+        response_vars=["metric_a"],
+        subject_ids="sub_id",
+    )
+    data["Yhat"] = (["observations", "response_vars"], data.Y.values.copy())
+    data["Z"] = (["observations", "response_vars"], np.zeros(data.Y.shape))
+
+    with pytest.raises(ValueError, match="no visit labels"):
+        data.get_visits()
 
 
 def test_get_visits_requires_numeric_labels(

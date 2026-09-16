@@ -81,13 +81,7 @@ def make_prior(name: str = "theta", **kwargs) -> BasePrior:
           independent.
         - `True` - **centered**: the offsets are drawn directly at the group
           scale, `offset ~ ZeroSumNormal(sigma)`. Prefer this for
-          mode-based approximations (`inference_method="laplace"`), which are
-          biased by the funnel the non-centered form creates: there the scale
-          and the offsets it multiplies are only jointly identified, so the
-          posterior mode sits far from the posterior mass.
-
-        The right choice therefore depends on the inference method rather than
-        on the data, which is why it is exposed rather than fixed.
+          mode-based approximations (`inference_method="laplace"`).
     """
     kwargs["name"] = name
     # Extract the 'centered' flag from the keyword arguments, defaulting to False.
@@ -131,8 +125,8 @@ def prior_from_args(name: str, args: Dict[str, Any], dims: Optional[Union[Tuple[
     elif my_args.get(f"random_{name}", False):
         mu = prior_from_args(f"mu_{name}", my_args, dims=dims)
         sigma = prior_from_args(f"sigma_{name}", my_args, dims=dims)
-        # `centered_<name>` picks the parameterisation of the random effect; see
-        # `make_prior` for what the two forms mean and when each is preferable.
+        # When running a model in the CLI specify`centered_<name>` to run CenteredRandomPrior, 
+        # e.g., "centered_intercept_mu": True 
         cls = CenteredRandomPrior if my_args.get(f"centered_{name}", False) else RandomPrior
         return cls(mu=mu, sigma=sigma, name=name, dims=dims, mapping=mapping, mapping_params=mapping_params)
     else:

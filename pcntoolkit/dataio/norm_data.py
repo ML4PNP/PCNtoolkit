@@ -368,7 +368,8 @@ class NormData(xr.Dataset):
             heavy-tailed data prefer "iqr".
         remove_outliers_group_by : List[str] | None, optional
             The columns defining the groups within which the outlier thresholds
-            are computed, e.g. ["site"]. Several columns can be combined into a
+            are computed, e.g. ["site"] finds outliers separately for each site rather than across 
+            all sites at once. Several columns can be combined into a
             single grouping. If None, the thresholds are computed across all rows
             and a warning is raised, since site differences are then ignored.
             By default None.

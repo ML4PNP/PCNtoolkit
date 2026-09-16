@@ -474,6 +474,12 @@ class CenteredRandomPrior(RandomPrior):
                 if be_i not in self.sigmas:
                     self.sigmas[be_i] = copy.deepcopy(self.sigma)
                     self.sigmas[be_i].set_name(f"{be_i}_sigma_{self.name}")
+                # TODO: CenteredRandomPrioronly works for a random intercept (`intercept_mu`), where
+                # self.dims is None. For a random slope (`slope_mu`) self.dims is
+                # ("covariates",), so sigma has one value per covariate, which
+                # ZeroSumNormal rejects: "sigma must have length one across the
+                # zero-sum axes". Fix: pass sigma[..., None] to ZeroSumNormal to give sigma a per-covariate
+                # axis and transpose the result, so shapes match RandomPrior (observations first).
                 self.scaled_offsets[be_i] = pm.ZeroSumNormal(
                     f"{be_i}_offset_{self.name}", sigma=self.sigmas[be_i].compile(model, X, be, be_maps, Y), dims=be_dims
                 )

@@ -369,8 +369,8 @@ class NormData(xr.Dataset):
         remove_outliers_group_by : List[str] | None, optional
             The columns defining the groups within which the outlier thresholds
             are computed, e.g. ["site"]. Several columns can be combined into a
-            single grouping. If None, the thresholds are computed across all rows 
-            and a warning is raised, since site differences are then ignored. 
+            single grouping. If None, the thresholds are computed across all rows
+            and a warning is raised, since site differences are then ignored.
             By default None.
         iqr_factor : float, optional
             The multiplier k of Tukey's fences, Q1 - k*IQR and Q3 + k*IQR. Used
@@ -397,7 +397,7 @@ class NormData(xr.Dataset):
         if visits:
             all_colums += [visits]
 
-        # Check that the grouping columns for outlier removal select by the user 
+        # Check that the grouping columns for outlier removal select by the user
         # actually exist in the data.
         if remove_outliers and remove_outliers_group_by:
             missing = [c for c in remove_outliers_group_by if c not in dataframe.columns]
@@ -414,7 +414,7 @@ class NormData(xr.Dataset):
                     f"subject_ids or visits when creating the NormData. Declare them as batch effects."
                 )
 
-        # Drop all columns that are not in all_colums (e.g., columns not declared as 
+        # Drop all columns that are not in all_colums (e.g., columns not declared as
         # covariates, response_vars, batch_effects, subject_ids, or visits).
         dataframe = dataframe[all_colums]
         if remove_Nan:
@@ -548,6 +548,8 @@ class NormData(xr.Dataset):
         """
         if not isinstance(approach, str):
             raise ValueError(f"approach must be a string, got {type(approach).__name__}. Use 'z-score' or 'iqr'.")
+        # Accept "IQR" and "Z-Score" as well as their lowercase spellings.
+        approach = approach.lower()
         if approach not in ("z-score", "iqr"):
             raise ValueError(f"Unknown outlier removal approach '{approach}'. Use 'z-score' or 'iqr'.")
 
@@ -564,7 +566,8 @@ class NormData(xr.Dataset):
                 stacklevel=2,
             )
 
-        # Group all the batch effects
+        # Group on the columns themselves rather than a joined string key, so that
+        # e.g. ("x_y", "z") and ("x", "y_z") stay distinct groups.
         if group_by:
             grouping: Any = [dataframe[col] for col in group_by]
         else:
@@ -601,7 +604,7 @@ class NormData(xr.Dataset):
         Returns
         -------
         pd.Series
-            Boolean mask, True where the value is an outlier. 
+            Boolean mask, True where the value is an outlier.
             NaN where the group's standard deviation is zero.
         """
         mean = grouped.transform("mean")
@@ -625,7 +628,7 @@ class NormData(xr.Dataset):
         Returns
         -------
         pd.Series
-            Boolean mask, True where the value is an outlier. 
+            Boolean mask, True where the value is an outlier.
             Groups with zero IQR flag nothing.
         """
         q1 = grouped.transform("quantile", Q1_QUANTILE)

@@ -75,7 +75,19 @@ When writing explanations, plans, docstrings, comments, commit messages and summ
 
 - Be concise. More text is not better. No filler, flattery, or marketing tone.
 - Audience: a neuroscientist who codes, but is not a statistician, software
-  engineer, or ML expert.
+  engineer, or ML expert. Assume the reader is short of time and will
+  skim before they read.
+- Lead with the conclusion. Put the answer, decision, or goal in the first
+  sentence; supporting detail after it. Never build up to the point.
+- Explain statistical and Bayesian terms on first use, in one clause
+  (`the prior (what we assume before seeing data)`). Try to teach the user, not just give them the right answer. Do not assume
+  `shrinkage`, `posterior`, `hyperprior`, `centered/non-centered`,
+  `random effect` or `MCMC convergence` are already familiar.
+- Prefer one concrete worked example with real numbers over an abstract
+  description. If you use an analogy, say where it breaks down.
+- Plans: no more than one page. State the goal in one line, then numbered
+  steps naming the files to change. Skip background the reader already
+  has, alternatives you are not taking, and restating the request.
 
 ### Commits/PRs
 

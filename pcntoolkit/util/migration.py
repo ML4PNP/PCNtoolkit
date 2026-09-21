@@ -1,12 +1,12 @@
 """
-The saved model JSON file can change structure across PCNtoolkit versions as 
+The saved model JSON file can change structure across PCNtoolkit versions as
 new features are added. This module is one central place to register
 and apply migrations required to load these changed models files.
 
 This module does two things:
 1. It updates older saved models during loading.
 
-2. It warns if a model was created with a newer PCNtoolkit version than 
+2. It warns if a model was created with a newer PCNtoolkit version than
 the one currently installed by the user.
 
 In simple:
@@ -115,7 +115,7 @@ class MigrationRegistry:
         Apply all migrations specified in self._migrations when loading models
         saved with previous PCNtoolkit versions.
 
-        Called by from_dict() methods that exist in the components being 
+        Called by from_dict() methods that exist in the components being
         migrated (e.g. BasisFunction.from_dict()).
 
         Parameters
@@ -126,20 +126,18 @@ class MigrationRegistry:
         d : dict
             The raw dict read from a saved JSON file.
         version : str | None, optional
-            Explicit version override. If no version is exists in the JSON 
+            Explicit version override. If no version is exists in the JSON
             file, it defaults to 0.0.0
 
         Returns
         -------
         dict
-            The dict, updated to the format expected by the current 
+            The dict, updated to the format expected by the current
             PCNtoolkit version.
         """
         # Determine the version of the saved dict.
         raw_version: str = (
-            version
-            if version is not None
-            else d.get("ptk_version", "0.0.0")
+            version if version is not None else d.get("ptk_version", "0.0.0")
         )
         # Use "0.0.0" as fallback for models saved before versioning.
         saved_version: Version = Version(raw_version or "0.0.0")
@@ -199,13 +197,15 @@ def check_forward_compatibility(
             current_version=str(parsed_current),
         )
 
-# MigrationRegistry is a singleton: All components import this same instance 
+
+# MigrationRegistry is a singleton: All components import this same instance
 # of registry which holds all registered migration functions.
 registry: MigrationRegistry = MigrationRegistry()
 
 # ---------------------------------------------------------------------------
 # Add migration functions below
 # ---------------------------------------------------------------------------
+
 
 @registry.register("BasisFunction", introduced_in="1.2.0post1")
 def _migrate_basis_function_1_2_0post1(d: dict) -> dict:
@@ -221,12 +221,12 @@ def _migrate_basis_function_1_2_0post1(d: dict) -> dict:
 
     Not implemented
     -------------
-    Basis functions with multiple basis columns saved before v1.2.0post1 
-    could store knots, min and max as multi-key dicts 
-    (e.g. ``{"0": [...], "1": [...]}``). 
+    Basis functions with multiple basis columns saved before v1.2.0post1
+    could store knots, min and max as multi-key dicts
+    (e.g. ``{"0": [...], "1": [...]}``).
     Migrating these to version higher than v1.2.0post1 is not yet supported.
     A ``NotImplementedError`` is raised when such a model is loaded.
-    
+
     Parameters
     ----------
     d : dict

@@ -166,7 +166,9 @@ class BsplineBasisFunction(BasisFunction):
     setting ``include_linear=True``. Since linear functions are already
     contained in the span of the B-spline basis, including this term may
     introduce linear dependence and is primarily provided for backward
-    compatibility with models fitted using earlier PCNtoolkit versions.
+    compatibility with models fitted using earlier PCNtoolkit versions. 
+    See `issue #542 <https://github.com/predictive-clinical-neuroscience/PCNtoolkit/issues/542>`_
+
 
     Parameters
     ----------

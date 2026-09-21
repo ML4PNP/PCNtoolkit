@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-import shutil
 from collections.abc import Callable
 from typing import Any
 
@@ -19,13 +18,82 @@ from pcntoolkit.normative_model import NormativeModel
 from pcntoolkit.regression_model.blr import BLR
 from test.fixtures.blr_model_fixtures import BLR_BASE_CONFIG
 
-# Re-export BLR and NormData fixtures without star-imports in test modules.
+# Base fixtures the module-scoped BLR fixtures below are built from:
+#   data_fixtures -> train_arrays (used by norm_data_from_arrays)
+#   path_fixtures -> save_dir_blr (used by norm_blr_model)
 pytest_plugins = [
     "test.fixtures.data_fixtures",
-    "test.fixtures.norm_data_fixtures",
     "test.fixtures.path_fixtures",
-    "test.fixtures.blr_model_fixtures",
 ]
+
+
+# ------------------------------------------------------------------ #
+# Module-scoped BLR fixtures (one fit shared across this test package)
+#
+# Fitting a BLR takes ~2s and ~40 tests here need one, so the model is fitted
+# once per module rather than once per test: ~55s -> ~4s. These replace the
+# function-scoped equivalents in test/fixtures/blr_model_fixtures.py: norm_data_fixtures 
+# and blr_model_fixtures 
+#
+# Safe here as in the current longitudinal tests: the fitted model is reused read-only.
+# If the fitted model was modified in one test then the next tests would see the modified 
+# state, potentially causing test failures.
+# ------------------------------------------------------------------ #
+
+
+@pytest.fixture(scope="module")
+def blr_model_factory() -> Callable[..., BLR]:
+    """Build BLR models for longitudinal tests without refitting each test."""
+    return lambda **overrides: BLR(
+        "test_blr",
+        **{
+            "basis_function_mean": BsplineBasisFunction(
+                basis_column=0, degree=3, nknots=5
+            ),
+            **BLR_BASE_CONFIG,
+            **overrides,
+        },
+    )
+
+
+@pytest.fixture(scope="module")
+def norm_data_from_arrays(train_arrays) -> NormData:
+    """Training NormData reused for the module-scoped BLR fit."""
+    X, y, batch_effects = train_arrays
+    return NormData.from_ndarrays("from_arrays", X, y, batch_effects)
+
+
+@pytest.fixture(scope="module")
+def norm_blr_model(
+    blr_model_factory: Callable[..., BLR],
+    save_dir_blr: str,
+) -> NormativeModel:
+    """Unfitted normative model for longitudinal BLR-backed tests."""
+    return NormativeModel(
+        blr_model_factory(),
+        save_dir=os.path.join(save_dir_blr, "longitudinal_module"),
+        savemodel=False,
+        saveresults=False,
+        evaluate_model=False,
+        saveplots=False,
+        inscaler="standardize",
+        outscaler="standardize",
+    )
+
+
+@pytest.fixture(scope="module")
+def fitted_norm_blr_model(
+    norm_blr_model: NormativeModel,
+    norm_data_from_arrays: NormData,
+) -> NormativeModel:
+    """Single fitted BLR reused by scoring and thriveline tests in this package."""
+    norm_blr_model.fit(norm_data_from_arrays)
+    return norm_blr_model
+
+
+# ------------------------------------------------------------------ #
+# Synthetic-data builders and the function-scoped fixtures wrapping them
+# ------------------------------------------------------------------ #
 
 
 def make_blr_longitudinal_dataframe(
@@ -348,63 +416,3 @@ def blr_predicted_norm_data_factory():
 def correlation_matrix_array_factory():
     """Return the synthetic correlation-matrix builder."""
     return make_correlation_matrix_array
-
-
-# ------------------------------------------------------------------ #
-# Module-scoped BLR fixtures (one fit shared across this test package)
-# ------------------------------------------------------------------ #
-
-
-@pytest.fixture(scope="module")
-def blr_model_factory() -> Callable[..., BLR]:
-    """Build BLR models for longitudinal tests without refitting each test."""
-    return lambda **overrides: BLR(
-        "test_blr",
-        **{
-            "basis_function_mean": BsplineBasisFunction(
-                basis_column=0, degree=3, nknots=5
-            ),
-            **BLR_BASE_CONFIG,
-            **overrides,
-        },
-    )
-
-
-@pytest.fixture(scope="module")
-def norm_data_from_arrays(train_arrays) -> NormData:
-    """Training NormData reused for the module-scoped BLR fit."""
-    X, y, batch_effects = train_arrays
-    return NormData.from_ndarrays("from_arrays", X, y, batch_effects)
-
-
-@pytest.fixture(scope="module")
-def norm_blr_model(
-    blr_model_factory: Callable[..., BLR],
-    save_dir_blr: str,
-) -> NormativeModel:
-    """Unfitted normative model for longitudinal BLR-backed tests."""
-    blr_model = blr_model_factory()
-    save_dir = os.path.join(save_dir_blr, "longitudinal_module")
-    if os.path.exists(save_dir):
-        shutil.rmtree(save_dir)
-    os.makedirs(save_dir, exist_ok=True)
-    return NormativeModel(
-        blr_model,
-        save_dir=save_dir,
-        savemodel=False,
-        saveresults=False,
-        evaluate_model=False,
-        saveplots=False,
-        inscaler="standardize",
-        outscaler="standardize",
-    )
-
-
-@pytest.fixture(scope="module")
-def fitted_norm_blr_model(
-    norm_blr_model: NormativeModel,
-    norm_data_from_arrays: NormData,
-) -> NormativeModel:
-    """Single fitted BLR reused by scoring and thriveline tests in this package."""
-    norm_blr_model.fit(norm_data_from_arrays)
-    return norm_blr_model

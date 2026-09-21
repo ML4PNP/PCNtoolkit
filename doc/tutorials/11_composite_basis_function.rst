@@ -31,7 +31,7 @@
     warnings.simplefilter(action="ignore", category=FutureWarning)
     pd.options.mode.chained_assignment = None  # default='warn'
     pcntoolkit.util.output.Output.set_show_messages(False)
-    
+
 
 .. code:: ipython3
 
@@ -62,14 +62,14 @@
     CompositeBasisFunction(
             (BsplineBasisFunction(basis_column=0, degree=3, nknots=5), BsplineBasisFunction(basis_column=1, degree=3, nknots=5))
         ),
-    
+
 
 
 
 
 .. code:: text
 
-    (<pcntoolkit.math_functions.basis_function.CompositeBasisFunction at 0x7f120864c1a0>,)
+    (<pcntoolkit.math_functions.basis_function.CompositeBasisFunction at 0x7f54d0befcb0>,)
 
 
 
@@ -161,202 +161,6 @@
 .. code:: ipython3
 
     model.fit_predict(train, test)
-
-
-.. code:: text
-
-    /opt/hostedtoolcache/Python/3.13.14/x64/lib/python3.13/site-packages/pytensor/link/c/cmodule.py:2986: UserWarning: PyTensor could not link to a BLAS installation. Operations that might benefit from BLAS will be severely degraded.
-    This usually happens when PyTensor is installed via pip. We recommend it be installed via conda/mamba/pixi instead.
-    Alternatively, you can use an experimental backend such as Numba or JAX that perform their own BLAS optimizations, by setting `pytensor.config.mode == 'NUMBA'` or passing `mode='NUMBA'` when compiling a PyTensor function.
-    For more options and details see https://pytensor.readthedocs.io/en/latest/troubleshooting.html#how-do-i-configure-test-my-blas-library
-      warnings.warn(
-    
-
-
-.. raw:: html
-
-    
-    <style>
-        :root {
-            --column-width-1: 40%; /* Progress column width */
-            --column-width-2: 15%; /* Chain column width */
-            --column-width-3: 15%; /* Divergences column width */
-            --column-width-4: 15%; /* Step Size column width */
-            --column-width-5: 15%; /* Gradients/Draw column width */
-        }
-    
-        .nutpie {
-            max-width: 800px;
-            margin: 10px auto;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            //color: #333;
-            //background-color: #fff;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            font-size: 14px; /* Smaller font size for a more compact look */
-        }
-        .nutpie table {
-            width: 100%;
-            border-collapse: collapse; /* Remove any extra space between borders */
-        }
-        .nutpie th, .nutpie td {
-            padding: 8px 10px; /* Reduce padding to make table more compact */
-            text-align: left;
-            border-bottom: 1px solid #888;
-        }
-        .nutpie th {
-            //background-color: #f0f0f0;
-        }
-    
-        .nutpie th:nth-child(1) { width: var(--column-width-1); }
-        .nutpie th:nth-child(2) { width: var(--column-width-2); }
-        .nutpie th:nth-child(3) { width: var(--column-width-3); }
-        .nutpie th:nth-child(4) { width: var(--column-width-4); }
-        .nutpie th:nth-child(5) { width: var(--column-width-5); }
-    
-        .nutpie progress {
-            width: 100%;
-            height: 15px; /* Smaller progress bars */
-            border-radius: 5px;
-        }
-        progress::-webkit-progress-bar {
-            background-color: #eee;
-            border-radius: 5px;
-        }
-        progress::-webkit-progress-value {
-            background-color: #5cb85c;
-            border-radius: 5px;
-        }
-        progress::-moz-progress-bar {
-            background-color: #5cb85c;
-            border-radius: 5px;
-        }
-        .nutpie .progress-cell {
-            width: 100%;
-        }
-    
-        .nutpie p strong { font-size: 16px; font-weight: bold; }
-    
-        @media (prefers-color-scheme: dark) {
-            .nutpie {
-                //color: #ddd;
-                //background-color: #1e1e1e;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            }
-            .nutpie table, .nutpie th, .nutpie td {
-                border-color: #555;
-                color: #ccc;
-            }
-            .nutpie th {
-                background-color: #2a2a2a;
-            }
-            .nutpie progress::-webkit-progress-bar {
-                background-color: #444;
-            }
-            .nutpie progress::-webkit-progress-value {
-                background-color: #3178c6;
-            }
-            .nutpie progress::-moz-progress-bar {
-                background-color: #3178c6;
-            }
-        }
-    </style>
-    
-
-
-
-.. raw:: html
-
-    
-    <div class="nutpie">
-        <p><strong>Sampler Progress</strong></p>
-        <p>Total Chains: <span id="total-chains">4</span></p>
-        <p>Active Chains: <span id="active-chains">0</span></p>
-        <p>
-            Finished Chains:
-            <span id="active-chains">4</span>
-        </p>
-        <p>Sampling for a minute</p>
-        <p>
-            Estimated Time to Completion:
-            <span id="eta">now</span>
-        </p>
-    
-        <progress
-            id="total-progress-bar"
-            max="8000"
-            value="8000">
-        </progress>
-        <table>
-            <thead>
-                <tr>
-                    <th>Progress</th>
-                    <th>Draws</th>
-                    <th>Divergences</th>
-                    <th>Step Size</th>
-                    <th>Gradients/Draw</th>
-                </tr>
-            </thead>
-            <tbody id="chain-details">
-    
-                    <tr>
-                        <td class="progress-cell">
-                            <progress
-                                max="2000"
-                                value="2000">
-                            </progress>
-                        </td>
-                        <td>2000</td>
-                        <td>12</td>
-                        <td>0.08</td>
-                        <td>127</td>
-                    </tr>
-    
-                    <tr>
-                        <td class="progress-cell">
-                            <progress
-                                max="2000"
-                                value="2000">
-                            </progress>
-                        </td>
-                        <td>2000</td>
-                        <td>4</td>
-                        <td>0.09</td>
-                        <td>63</td>
-                    </tr>
-    
-                    <tr>
-                        <td class="progress-cell">
-                            <progress
-                                max="2000"
-                                value="2000">
-                            </progress>
-                        </td>
-                        <td>2000</td>
-                        <td>9</td>
-                        <td>0.08</td>
-                        <td>63</td>
-                    </tr>
-    
-                    <tr>
-                        <td class="progress-cell">
-                            <progress
-                                max="2000"
-                                value="2000">
-                            </progress>
-                        </td>
-                        <td>2000</td>
-                        <td>11</td>
-                        <td>0.09</td>
-                        <td>511</td>
-                    </tr>
-    
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
 
 
 
@@ -920,12 +724,12 @@
         Y                  (observations, response_vars) float64 2kB 4.579e+05 .....
         X                  (observations, covariates) float64 3kB 63.0 ... 1.603e+06
         batch_effects      (observations, batch_effect_dims) &lt;U17 29kB &#x27;F&#x27; ... &#x27;Q...
-        Z                  (observations, response_vars) float64 2kB -0.1506 ... ...
+        Z                  (observations, response_vars) float64 2kB -0.1483 ... ...
         centiles           (centile, observations, response_vars) float64 9kB 4.2...
         baseline_logp      (observations, response_vars) float64 2kB -1.036 ... -...
-        logp               (observations, response_vars) float64 2kB -0.05484 ......
+        logp               (observations, response_vars) float64 2kB -0.06719 ......
         Yhat               (observations, response_vars) float64 2kB 4.609e+05 .....
-        statistics         (response_vars, statistic) float64 104B 0.6692 ... 0.3328
+        statistics         (response_vars, statistic) float64 104B 0.6693 ... 0.3136
     Attributes:
         real_ids:                       False
         is_scaled:                      False
@@ -933,8 +737,8 @@
         unique_batch_effects:           {np.str_(&#x27;sex&#x27;): [&#x27;M&#x27;, &#x27;F&#x27;], np.str_(&#x27;sit...
         batch_effect_counts:            defaultdict(&lt;function NormData.register_b...
         covariate_ranges:               {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 85....
-        batch_effect_covariate_ranges:  {np.str_(&#x27;sex&#x27;): {&#x27;M&#x27;: {np.str_(&#x27;age&#x27;): {...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.NormData</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-52a0ec79-cafd-4fb0-b25a-e3db3adc3c6d' class='xr-section-summary-in' type='checkbox' disabled /><label for='section-52a0ec79-cafd-4fb0-b25a-e3db3adc3c6d' class='xr-section-summary'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>observations</span>: 216</li><li><span class='xr-has-index'>response_vars</span>: 1</li><li><span class='xr-has-index'>covariates</span>: 2</li><li><span class='xr-has-index'>batch_effect_dims</span>: 2</li><li><span class='xr-has-index'>centile</span>: 5</li><li><span class='xr-has-index'>statistic</span>: 13</li></ul></div></li><li class='xr-section-item'><input id='section-6447cc4e-4da7-4de9-a184-43f48ecee4bd' class='xr-section-summary-in' type='checkbox' checked /><label for='section-6447cc4e-4da7-4de9-a184-43f48ecee4bd' class='xr-section-summary' title='Expand/collapse section'>Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>observations</span></div><div class='xr-var-dims'>(observations)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>756 769 692 616 ... 751 470 1043</div><input id='attrs-b44d5f5b-d970-47bc-a8c8-4bc40554efdd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b44d5f5b-d970-47bc-a8c8-4bc40554efdd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-834690b0-3905-4c3f-8886-ff9af3015c1e' class='xr-var-data-in' type='checkbox'><label for='data-834690b0-3905-4c3f-8886-ff9af3015c1e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 756,  769,  692, ...,  751,  470, 1043], shape=(216,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>response_vars</span></div><div class='xr-var-dims'>(response_vars)</div><div class='xr-var-dtype'>&lt;U9</div><div class='xr-var-preview xr-preview'>&#x27;CortexVol&#x27;</div><input id='attrs-edae4de6-525f-405c-90c9-cd3fa42da4b3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-edae4de6-525f-405c-90c9-cd3fa42da4b3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3b35a9e9-dc34-4015-af9e-6baf76502caa' class='xr-var-data-in' type='checkbox'><label for='data-3b35a9e9-dc34-4015-af9e-6baf76502caa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;CortexVol&#x27;], dtype=&#x27;&lt;U9&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>covariates</span></div><div class='xr-var-dims'>(covariates)</div><div class='xr-var-dtype'>&lt;U29</div><div class='xr-var-preview xr-preview'>&#x27;age&#x27; &#x27;EstimatedTotalIntraCrania...</div><input id='attrs-b79d055b-e251-49cf-9aad-114db6ccf2bc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b79d055b-e251-49cf-9aad-114db6ccf2bc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-969c6830-f63e-440d-aae2-c105224cb9e2' class='xr-var-data-in' type='checkbox'><label for='data-969c6830-f63e-440d-aae2-c105224cb9e2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;age&#x27;, &#x27;EstimatedTotalIntraCranialVol&#x27;], dtype=&#x27;&lt;U29&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>batch_effect_dims</span></div><div class='xr-var-dims'>(batch_effect_dims)</div><div class='xr-var-dtype'>&lt;U4</div><div class='xr-var-preview xr-preview'>&#x27;sex&#x27; &#x27;site&#x27;</div><input id='attrs-921d26ff-b75b-4a49-b460-385b7dc13756' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-921d26ff-b75b-4a49-b460-385b7dc13756' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-47d5221d-ed1b-486c-912f-498b7349726f' class='xr-var-data-in' type='checkbox'><label for='data-47d5221d-ed1b-486c-912f-498b7349726f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;sex&#x27;, &#x27;site&#x27;], dtype=&#x27;&lt;U4&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>centile</span></div><div class='xr-var-dims'>(centile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.05 0.25 0.5 0.75 0.95</div><input id='attrs-f7961786-c6ef-4946-a244-719b36cd39a4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f7961786-c6ef-4946-a244-719b36cd39a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f681135a-67fd-45e4-a6b5-3cf39e7f6fa8' class='xr-var-data-in' type='checkbox'><label for='data-f681135a-67fd-45e4-a6b5-3cf39e7f6fa8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0.05, 0.25, 0.5 , 0.75, 0.95])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>statistic</span></div><div class='xr-var-dims'>(statistic)</div><div class='xr-var-dtype'>&lt;U8</div><div class='xr-var-preview xr-preview'>&#x27;EXPV&#x27; &#x27;Kurtosis&#x27; ... &#x27;Skewness&#x27;</div><input id='attrs-93a2035b-5306-4211-bd93-3182d4b1e144' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-93a2035b-5306-4211-bd93-3182d4b1e144' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e1ae7c5a-1c3c-4f02-9ff3-42d22a0c7e8e' class='xr-var-data-in' type='checkbox'><label for='data-e1ae7c5a-1c3c-4f02-9ff3-42d22a0c7e8e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;EXPV&#x27;, &#x27;Kurtosis&#x27;, &#x27;MACE&#x27;, &#x27;MAPE&#x27;, &#x27;MLL&#x27;, &#x27;MSLL&#x27;, &#x27;R2&#x27;, &#x27;RMSE&#x27;, &#x27;Rho&#x27;,
-           &#x27;Rho_p&#x27;, &#x27;SMSE&#x27;, &#x27;ShapiroW&#x27;, &#x27;Skewness&#x27;], dtype=&#x27;&lt;U8&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-65440bbb-a683-4a9c-9377-bbd0e4d3e644' class='xr-section-summary-in' type='checkbox' checked /><label for='section-65440bbb-a683-4a9c-9377-bbd0e4d3e644' class='xr-section-summary' title='Expand/collapse section'>Data variables: <span>(10)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>subject_ids</span></div><div class='xr-var-dims'>(observations)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>756 769 692 616 ... 751 470 1043</div><input id='attrs-2f55a2f0-0229-411a-a0c7-3f60b4974789' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2f55a2f0-0229-411a-a0c7-3f60b4974789' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bac4c1d2-975f-4636-add1-1a7bdbb12b58' class='xr-var-data-in' type='checkbox'><label for='data-bac4c1d2-975f-4636-add1-1a7bdbb12b58' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 756,  769,  692,  616,   35,  164,  680,  331,  299,  727,  136,
+        batch_effect_covariate_ranges:  {np.str_(&#x27;sex&#x27;): {&#x27;M&#x27;: {np.str_(&#x27;age&#x27;): {...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.NormData</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-236bab91-55ba-43a7-9939-6e84466a6502' class='xr-section-summary-in' type='checkbox' disabled /><label for='section-236bab91-55ba-43a7-9939-6e84466a6502' class='xr-section-summary'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>observations</span>: 216</li><li><span class='xr-has-index'>response_vars</span>: 1</li><li><span class='xr-has-index'>covariates</span>: 2</li><li><span class='xr-has-index'>batch_effect_dims</span>: 2</li><li><span class='xr-has-index'>centile</span>: 5</li><li><span class='xr-has-index'>statistic</span>: 13</li></ul></div></li><li class='xr-section-item'><input id='section-6bbce3b7-c697-418f-a455-68c7c22fb211' class='xr-section-summary-in' type='checkbox' checked /><label for='section-6bbce3b7-c697-418f-a455-68c7c22fb211' class='xr-section-summary' title='Expand/collapse section'>Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>observations</span></div><div class='xr-var-dims'>(observations)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>756 769 692 616 ... 751 470 1043</div><input id='attrs-aedde3d2-8d77-44c0-b6dd-69a1d82ff36c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-aedde3d2-8d77-44c0-b6dd-69a1d82ff36c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dda5ab0d-734f-4cd3-86bd-812b977eb111' class='xr-var-data-in' type='checkbox'><label for='data-dda5ab0d-734f-4cd3-86bd-812b977eb111' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 756,  769,  692, ...,  751,  470, 1043], shape=(216,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>response_vars</span></div><div class='xr-var-dims'>(response_vars)</div><div class='xr-var-dtype'>&lt;U9</div><div class='xr-var-preview xr-preview'>&#x27;CortexVol&#x27;</div><input id='attrs-63e530f2-a27c-425f-a3c9-b34243130ec0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-63e530f2-a27c-425f-a3c9-b34243130ec0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a6da0698-9fe7-4e4d-9370-c1e4415a2d74' class='xr-var-data-in' type='checkbox'><label for='data-a6da0698-9fe7-4e4d-9370-c1e4415a2d74' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;CortexVol&#x27;], dtype=&#x27;&lt;U9&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>covariates</span></div><div class='xr-var-dims'>(covariates)</div><div class='xr-var-dtype'>&lt;U29</div><div class='xr-var-preview xr-preview'>&#x27;age&#x27; &#x27;EstimatedTotalIntraCrania...</div><input id='attrs-e6589c7f-23ad-4bd8-b38f-39d2471484a4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e6589c7f-23ad-4bd8-b38f-39d2471484a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1c5ede8c-9120-458b-bb45-e57a16a9f6a4' class='xr-var-data-in' type='checkbox'><label for='data-1c5ede8c-9120-458b-bb45-e57a16a9f6a4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;age&#x27;, &#x27;EstimatedTotalIntraCranialVol&#x27;], dtype=&#x27;&lt;U29&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>batch_effect_dims</span></div><div class='xr-var-dims'>(batch_effect_dims)</div><div class='xr-var-dtype'>&lt;U4</div><div class='xr-var-preview xr-preview'>&#x27;sex&#x27; &#x27;site&#x27;</div><input id='attrs-a17d87fd-c46e-4667-8fe8-26a6d662c91c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a17d87fd-c46e-4667-8fe8-26a6d662c91c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-85c8ed03-f132-432d-90f3-342d6add0a13' class='xr-var-data-in' type='checkbox'><label for='data-85c8ed03-f132-432d-90f3-342d6add0a13' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;sex&#x27;, &#x27;site&#x27;], dtype=&#x27;&lt;U4&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>centile</span></div><div class='xr-var-dims'>(centile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.05 0.25 0.5 0.75 0.95</div><input id='attrs-b92937fc-2cd8-47ab-a09b-d6a3ae58d292' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b92937fc-2cd8-47ab-a09b-d6a3ae58d292' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e6bf2bf7-ea72-4901-a49e-2b7871d83a1c' class='xr-var-data-in' type='checkbox'><label for='data-e6bf2bf7-ea72-4901-a49e-2b7871d83a1c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0.05, 0.25, 0.5 , 0.75, 0.95])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>statistic</span></div><div class='xr-var-dims'>(statistic)</div><div class='xr-var-dtype'>&lt;U8</div><div class='xr-var-preview xr-preview'>&#x27;EXPV&#x27; &#x27;Kurtosis&#x27; ... &#x27;Skewness&#x27;</div><input id='attrs-5aa473c5-3900-494e-8949-fc70335692da' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5aa473c5-3900-494e-8949-fc70335692da' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ede8b28c-7041-48ba-93da-37d4bc567770' class='xr-var-data-in' type='checkbox'><label for='data-ede8b28c-7041-48ba-93da-37d4bc567770' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;EXPV&#x27;, &#x27;Kurtosis&#x27;, &#x27;MACE&#x27;, &#x27;MAPE&#x27;, &#x27;MLL&#x27;, &#x27;MSLL&#x27;, &#x27;R2&#x27;, &#x27;RMSE&#x27;, &#x27;Rho&#x27;,
+           &#x27;Rho_p&#x27;, &#x27;SMSE&#x27;, &#x27;ShapiroW&#x27;, &#x27;Skewness&#x27;], dtype=&#x27;&lt;U8&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f630358d-5dd6-4288-b969-426ad2fc04fd' class='xr-section-summary-in' type='checkbox' checked /><label for='section-f630358d-5dd6-4288-b969-426ad2fc04fd' class='xr-section-summary' title='Expand/collapse section'>Data variables: <span>(10)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>subject_ids</span></div><div class='xr-var-dims'>(observations)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>756 769 692 616 ... 751 470 1043</div><input id='attrs-ea196e02-0ed9-4b1b-bc2a-c74446212c62' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ea196e02-0ed9-4b1b-bc2a-c74446212c62' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7bb19159-03c6-48d1-b6d8-14d8a06763f3' class='xr-var-data-in' type='checkbox'><label for='data-7bb19159-03c6-48d1-b6d8-14d8a06763f3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 756,  769,  692,  616,   35,  164,  680,  331,  299,  727,  136,
              80,  209,  394,  653,  626,  935,  302,   61,  449,  984, 1036,
             518,  574,  593,  870,  828,  354,  947,  275,  874,  604,  948,
             670,  228,  294,  708,   90, 1020,  884,  856, 1023,  428,  635,
@@ -953,7 +757,7 @@
              95,  185,  985,  141,  295,  437,  138,   96,  155,   51, 1064,
            1046,  562,  527,   79,  861,  469,  710,  564,  907, 1054,  421,
             968,  875,  669,  618,  504,  343,  777,  133,   27,  959,   29,
-            346,  304,  264,  798,  751,  470, 1043])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Y</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.579e+05 5.268e+05 ... 5.035e+05</div><input id='attrs-fb1d5d62-39fa-4dbb-a083-02a974bf57d3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fb1d5d62-39fa-4dbb-a083-02a974bf57d3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-da27ffc5-6e55-425b-8d03-3722373e2706' class='xr-var-data-in' type='checkbox'><label for='data-da27ffc5-6e55-425b-8d03-3722373e2706' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[457858.327875],
+            346,  304,  264,  798,  751,  470, 1043])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Y</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.579e+05 5.268e+05 ... 5.035e+05</div><input id='attrs-1c0a1ad2-e0d3-4349-be2f-cd47d7aa6439' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1c0a1ad2-e0d3-4349-be2f-cd47d7aa6439' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c78d7d7e-fe19-4ed7-8a55-c8637323b83c' class='xr-var-data-in' type='checkbox'><label for='data-c78d7d7e-fe19-4ed7-8a55-c8637323b83c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[457858.327875],
            [526780.362454],
            [495744.470654],
            [585303.839185],
@@ -993,7 +797,7 @@
            [520499.662889],
            [486680.791077],
            [610402.005701],
-           [503535.771203]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>X</span></div><div class='xr-var-dims'>(observations, covariates)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>63.0 1.533e+06 ... 23.0 1.603e+06</div><input id='attrs-573cf403-23e9-47b0-b961-acb6830c532e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-573cf403-23e9-47b0-b961-acb6830c532e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-094f4bb3-d3e0-480c-9d24-25b0cbbbfbda' class='xr-var-data-in' type='checkbox'><label for='data-094f4bb3-d3e0-480c-9d24-25b0cbbbfbda' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[6.30000000e+01, 1.53274143e+06],
+           [503535.771203]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>X</span></div><div class='xr-var-dims'>(observations, covariates)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>63.0 1.533e+06 ... 23.0 1.603e+06</div><input id='attrs-51b68b3b-0317-4224-aa21-da606b88d6a1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-51b68b3b-0317-4224-aa21-da606b88d6a1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c8746328-05a7-49d5-90ee-4f348606693a' class='xr-var-data-in' type='checkbox'><label for='data-c8746328-05a7-49d5-90ee-4f348606693a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[6.30000000e+01, 1.53274143e+06],
            [2.32700000e+01, 1.40047223e+06],
            [2.20000000e+01, 1.48954279e+06],
            [4.20000000e+01, 1.86413298e+06],
@@ -1033,7 +837,7 @@
            [2.27900000e+01, 1.45689873e+06],
            [7.20000000e+01, 1.57223354e+06],
            [2.30000000e+01, 1.98747750e+06],
-           [2.30000000e+01, 1.60306371e+06]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>batch_effects</span></div><div class='xr-var-dims'>(observations, batch_effect_dims)</div><div class='xr-var-dtype'>&lt;U17</div><div class='xr-var-preview xr-preview'>&#x27;F&#x27; &#x27;Munchen&#x27; ... &#x27;M&#x27; &#x27;Queensland&#x27;</div><input id='attrs-0e047136-6aa0-494a-8788-dbb11a66c927' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0e047136-6aa0-494a-8788-dbb11a66c927' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9a3d483d-a261-4524-ae15-9019f8fa327f' class='xr-var-data-in' type='checkbox'><label for='data-9a3d483d-a261-4524-ae15-9019f8fa327f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[&#x27;F&#x27;, &#x27;Munchen&#x27;],
+           [2.30000000e+01, 1.60306371e+06]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>batch_effects</span></div><div class='xr-var-dims'>(observations, batch_effect_dims)</div><div class='xr-var-dtype'>&lt;U17</div><div class='xr-var-preview xr-preview'>&#x27;F&#x27; &#x27;Munchen&#x27; ... &#x27;M&#x27; &#x27;Queensland&#x27;</div><input id='attrs-fe426c69-17d7-47ce-a906-b82bf4474723' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fe426c69-17d7-47ce-a906-b82bf4474723' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e520d3af-36ff-4497-b23b-be8c72111ec9' class='xr-var-data-in' type='checkbox'><label for='data-e520d3af-36ff-4497-b23b-be8c72111ec9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[&#x27;F&#x27;, &#x27;Munchen&#x27;],
            [&#x27;M&#x27;, &#x27;NewYork_a&#x27;],
            [&#x27;F&#x27;, &#x27;Leiden_2200&#x27;],
            [&#x27;M&#x27;, &#x27;ICBM&#x27;],
@@ -1073,85 +877,85 @@
            [&#x27;M&#x27;, &#x27;NewYork_a&#x27;],
            [&#x27;M&#x27;, &#x27;Munchen&#x27;],
            [&#x27;M&#x27;, &#x27;Cambridge_Buckner&#x27;],
-           [&#x27;M&#x27;, &#x27;Queensland&#x27;]], dtype=&#x27;&lt;U17&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Z</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.1506 1.034 ... 2.325 -0.8341</div><input id='attrs-b459f671-93bb-4030-9870-aab2b59a8e44' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b459f671-93bb-4030-9870-aab2b59a8e44' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-889bcebc-365c-4420-8429-5195f7840cf0' class='xr-var-data-in' type='checkbox'><label for='data-889bcebc-365c-4420-8429-5195f7840cf0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-0.15064833],
-           [ 1.03395782],
-           [ 0.62289739],
-           [ 1.51450907],
-           [-1.49350811],
-           [-1.3226671 ],
-           [-1.2644941 ],
-           [-0.98292101],
-           [ 0.04274012],
-           [-0.11462206],
-           [ 0.24998127],
-           [-0.69534204],
-           [ 0.28720534],
-           [ 1.377649  ],
-           [-1.32378917],
-           [-1.13757547],
-           [-0.05490656],
-           [-0.52932695],
-           [-0.81033714],
-           [ 0.33805337],
+           [&#x27;M&#x27;, &#x27;Queensland&#x27;]], dtype=&#x27;&lt;U17&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Z</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.1483 1.023 ... 2.334 -0.845</div><input id='attrs-4b35afef-9222-489a-826b-f1b39de06506' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4b35afef-9222-489a-826b-f1b39de06506' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cc358d83-12f7-4d08-80d0-b200744817e3' class='xr-var-data-in' type='checkbox'><label for='data-cc358d83-12f7-4d08-80d0-b200744817e3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-1.48322711e-01],
+           [ 1.02328630e+00],
+           [ 6.27153712e-01],
+           [ 1.52152687e+00],
+           [-1.45827707e+00],
+           [-1.32049009e+00],
+           [-1.25918001e+00],
+           [-9.88406220e-01],
+           [ 4.24007035e-02],
+           [-1.09466142e-01],
+           [ 2.49989850e-01],
+           [-6.97232363e-01],
+           [ 2.87651641e-01],
+           [ 1.38790893e+00],
+           [-1.32069425e+00],
+           [-1.14853758e+00],
+           [-5.52899492e-02],
+           [-5.30266842e-01],
+           [-8.07549885e-01],
+           [ 3.38320476e-01],
     ...
-           [-1.14449412],
-           [ 0.0551027 ],
-           [-0.61555997],
-           [-0.5065645 ],
-           [-1.55544126],
-           [ 2.10892592],
-           [-0.31276101],
-           [-0.36938859],
-           [-3.6444885 ],
-           [-0.97696923],
-           [-0.38394173],
-           [-0.59659848],
-           [-0.1090212 ],
-           [-0.21583882],
-           [-1.14244867],
-           [ 1.31783594],
-           [ 0.33404236],
-           [ 0.97915049],
-           [ 2.32461282],
-           [-0.83408466]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>centiles</span></div><div class='xr-var-dims'>(centile, observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.269e+05 4.601e+05 ... 5.61e+05</div><input id='attrs-db77c0e0-f6f5-4843-955a-6a81566a267c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-db77c0e0-f6f5-4843-955a-6a81566a267c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cd8f15b6-a997-4b0d-9f2f-6511d46e4cdc' class='xr-var-data-in' type='checkbox'><label for='data-cd8f15b6-a997-4b0d-9f2f-6511d46e4cdc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[426877.27270244],
-            [460136.62432424],
-            [439951.87822939],
+           [-1.15497262e+00],
+           [ 5.57375822e-02],
+           [-6.13275158e-01],
+           [-5.26658593e-01],
+           [-1.53977196e+00],
+           [ 1.99249858e+00],
+           [-3.14296420e-01],
+           [-3.70125930e-01],
+           [-3.65172768e+00],
+           [-9.79410386e-01],
+           [-3.73155256e-01],
+           [-5.94331203e-01],
+           [-9.68513098e-02],
+           [-2.23349725e-01],
+           [-1.14382972e+00],
+           [ 1.32314408e+00],
+           [ 3.22989360e-01],
+           [ 9.41609900e-01],
+           [ 2.33385968e+00],
+           [-8.45004470e-01]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>centiles</span></div><div class='xr-var-dims'>(centile, observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.264e+05 4.604e+05 ... 5.612e+05</div><input id='attrs-a0c618c1-d717-41ed-a00e-0322b7795c89' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a0c618c1-d717-41ed-a00e-0322b7795c89' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-aa7281bf-1c95-47ad-886d-597abbb26bbd' class='xr-var-data-in' type='checkbox'><label for='data-aa7281bf-1c95-47ad-886d-597abbb26bbd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[426444.54292573],
+            [460372.9703569 ],
+            [439827.24549258],
             ...,
-            [429522.61305018],
-            [530899.50408766],
-            [484728.66313667]],
+            [427535.82682282],
+            [530825.20053395],
+            [484981.67980236]],
     
-           [[446972.7076769 ],
-            [484285.05966774],
-            [463832.15513723],
+           [[446790.51437415],
+            [484532.26460791],
+            [463715.34532811],
             ...,
-            [450753.72646671],
-            [550383.49361592],
-            [507218.2960705 ]],
+            [449822.50079095],
+            [550280.54331798],
+            [507467.80567618]],
     
-           [[460940.83369714],
-            [501070.3837226 ],
-            [480431.08507682],
+           [[460932.78566894],
+            [501325.13657544],
+            [480319.71290267],
             ...,
-            [465511.2506571 ],
-            [563926.61032145],
-            [522850.60397366]],
+            [465313.73404639],
+            [563803.74797215],
+            [523097.67585873]],
     
-           [[474908.95971737],
-            [517855.70777745],
-            [497030.01501642],
+           [[475075.05696373],
+            [518118.00854298],
+            [496924.08047724],
             ...,
-            [480268.77484749],
-            [577469.72702699],
-            [538482.91187682]],
+            [480804.96730183],
+            [577326.95262632],
+            [538727.54604127]],
     
-           [[495004.39469183],
-            [542004.14312095],
-            [520910.29192425],
+           [[495421.02841216],
+            [542277.30279399],
+            [520812.18031277],
             ...,
-            [501499.88826401],
-            [596953.71655524],
-            [560972.54481065]]], shape=(5, 216, 1))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>baseline_logp</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.036 -1.182 ... -4.021 -0.9114</div><input id='attrs-9b2dbcd3-5e85-4c47-80da-e51bddfb5a81' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9b2dbcd3-5e85-4c47-80da-e51bddfb5a81' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e2ab3dd2-8d22-40e4-9d1b-a6da8c5ed67b' class='xr-var-data-in' type='checkbox'><label for='data-e2ab3dd2-8d22-40e4-9d1b-a6da8c5ed67b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-1.03593217],
+            [503091.64126996],
+            [596782.29541034],
+            [561213.6719151 ]]], shape=(5, 216, 1))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>baseline_logp</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.036 -1.182 ... -4.021 -0.9114</div><input id='attrs-931fcfe7-93ab-41cf-b1d7-91cc98d91da2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-931fcfe7-93ab-41cf-b1d7-91cc98d91da2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bdbaff51-0fc4-403c-bd26-8d3b9f6d66bb' class='xr-var-data-in' type='checkbox'><label for='data-bdbaff51-0fc4-403c-bd26-8d3b9f6d66bb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-1.03593217],
            [-1.18228146],
            [-0.8710495 ],
            [-2.86273506],
@@ -1191,91 +995,91 @@
            [-1.08685779],
            [-0.85598943],
            [-4.02130046],
-           [-0.91139503]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>logp</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.05484 -0.7267 ... -2.738 -0.4871</div><input id='attrs-c60f52f5-9c1c-4aa4-b6b9-732678e807e7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c60f52f5-9c1c-4aa4-b6b9-732678e807e7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cbb79a25-18a4-4807-8293-53d499bfad82' class='xr-var-data-in' type='checkbox'><label for='data-cbb79a25-18a4-4807-8293-53d499bfad82' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-0.05483998],
-           [-0.72670494],
-           [-0.39101237],
-           [-1.14801602],
-           [-1.33160833],
-           [-0.95869098],
-           [-0.88786102],
-           [-0.63636453],
-           [-0.26529955],
-           [-0.17725493],
-           [-0.16783507],
-           [-0.5361784 ],
-           [-0.22538082],
-           [-1.00180648],
-           [-0.84915496],
-           [-0.83403243],
-           [-0.18057522],
-           [-0.33980331],
-           [-0.47021914],
-           [-0.29402339],
+           [-0.91139503]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>logp</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.06719 -0.7156 ... -2.757 -0.496</div><input id='attrs-d93b12fa-1b8a-4ba1-bead-e91f8b009cd8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d93b12fa-1b8a-4ba1-bead-e91f8b009cd8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-79b2172a-ece4-4c44-b825-ba4a3058d20e' class='xr-var-data-in' type='checkbox'><label for='data-79b2172a-ece4-4c44-b825-ba4a3058d20e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-0.06719125],
+           [-0.71564529],
+           [-0.39312262],
+           [-1.15713134],
+           [-1.2891764 ],
+           [-0.95545517],
+           [-0.87993161],
+           [-0.63990588],
+           [-0.26609821],
+           [-0.17688366],
+           [-0.16647469],
+           [-0.53908063],
+           [-0.22463567],
+           [-1.01441114],
+           [-0.8415011 ],
+           [-0.84589112],
+           [-0.18138822],
+           [-0.3377576 ],
+           [-0.46576539],
+           [-0.28928908],
     ...
-           [-0.89154741],
-           [-0.06953964],
-           [-0.43169164],
-           [-0.67009233],
-           [-1.28793038],
-           [-2.34429685],
-           [-0.2222581 ],
-           [-0.08480808],
-           [-6.6456723 ],
-           [-0.687309  ],
-           [-0.3168465 ],
-           [-0.42017731],
-           [-0.319749  ],
-           [-0.24466973],
-           [-0.78932926],
-           [-0.98958609],
-           [-0.23398197],
-           [-0.5739711 ],
-           [-2.73750611],
-           [-0.48711718]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Yhat</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.609e+05 5.011e+05 ... 5.229e+05</div><input id='attrs-490cde47-a65e-4073-82f5-a23eca94c615' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-490cde47-a65e-4073-82f5-a23eca94c615' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5f45aabc-387c-4f4b-9679-e03034599723' class='xr-var-data-in' type='checkbox'><label for='data-5f45aabc-387c-4f4b-9679-e03034599723' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[460940.83369714],
-           [501070.3837226 ],
-           [480431.08507682],
-           [554714.98051114],
-           [369184.10634861],
-           [540492.18873667],
-           [578062.95398935],
-           [490917.81607029],
-           [458968.63458596],
-           [447271.69547616],
-           [553503.56497149],
-           [440507.50329522],
-           [512702.12988183],
-           [476862.81720342],
-           [561634.57515764],
-           [495727.14390142],
-           [532259.68830468],
-           [522729.71335778],
-           [478870.16908612],
-           [478417.01898068],
+           [-0.90325337],
+           [-0.06761755],
+           [-0.43136622],
+           [-0.68812924],
+           [-1.26431866],
+           [-2.15695588],
+           [-0.22316729],
+           [-0.0811972 ],
+           [-6.67008699],
+           [-0.68731458],
+           [-0.31269925],
+           [-0.41990683],
+           [-0.31727263],
+           [-0.2460947 ],
+           [-0.79062521],
+           [-0.9966246 ],
+           [-0.23016342],
+           [-0.58696976],
+           [-2.75749716],
+           [-0.49597778]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Yhat</span></div><div class='xr-var-dims'>(observations, response_vars)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.609e+05 5.013e+05 ... 5.231e+05</div><input id='attrs-ee562a8b-14f3-4fc0-bb30-322cf2a42ffc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ee562a8b-14f3-4fc0-bb30-322cf2a42ffc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c5d8f108-ba47-4fc1-8dda-12489e5f35d8' class='xr-var-data-in' type='checkbox'><label for='data-c5d8f108-ba47-4fc1-8dda-12489e5f35d8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[460932.78566894],
+           [501325.13657544],
+           [480319.71290267],
+           [554627.1173806 ],
+           [368831.62311043],
+           [540433.04303315],
+           [577906.35855688],
+           [491030.72020256],
+           [458977.708082  ],
+           [447149.98690339],
+           [553515.19945446],
+           [440585.31841601],
+           [512698.60846205],
+           [476691.27698739],
+           [561493.00755893],
+           [495990.76344408],
+           [532271.29285816],
+           [522715.81137202],
+           [478766.78570424],
+           [478454.24670877],
     ...
-           [483549.07255987],
-           [557248.48586368],
-           [489760.74195543],
-           [397547.77502841],
-           [535913.46603311],
-           [467833.26766404],
-           [445003.92280646],
-           [574864.37193633],
-           [584781.9275737 ],
-           [516881.84420005],
-           [488862.66168555],
-           [489763.95021224],
-           [457216.21837732],
-           [473536.17963753],
-           [536284.94599624],
-           [495943.40655485],
-           [512301.32545353],
-           [465511.2506571 ],
-           [563926.61032145],
-           [522850.60397366]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>statistics</span></div><div class='xr-var-dims'>(response_vars, statistic)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.6692 1.015 ... 0.9799 0.3328</div><input id='attrs-b9b51950-c789-4498-9910-75cfad7aa81e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b9b51950-c789-4498-9910-75cfad7aa81e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3cb828d7-059b-4865-8a25-c34a4db58707' class='xr-var-data-in' type='checkbox'><label for='data-3cb828d7-059b-4865-8a25-c34a4db58707' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ 6.69170819e-01,  1.01464893e+00,  1.73853276e-01,
-             4.44452200e-02,  8.60579286e-01, -4.95347034e-01,
-             6.64663971e-01,  2.83479644e+04,  8.06152729e-01,
-             1.14722184e-50,  3.35336029e-01,  9.79874219e-01,
-             3.32816179e-01]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7e664592-c80e-4bfa-a2c0-6b02856db22d' class='xr-section-summary-in' type='checkbox' checked /><label for='section-7e664592-c80e-4bfa-a2c0-6b02856db22d' class='xr-section-summary' title='Expand/collapse section'>Attributes: <span>(7)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>real_ids :</span></dt><dd>False</dd><dt><span>is_scaled :</span></dt><dd>False</dd><dt><span>name :</span></dt><dd>fcon1000_test</dd><dt><span>unique_batch_effects :</span></dt><dd>{np.str_(&#x27;sex&#x27;): [&#x27;M&#x27;, &#x27;F&#x27;], np.str_(&#x27;site&#x27;): [&#x27;AnnArbor_a&#x27;, &#x27;AnnArbor_b&#x27;, &#x27;Atlanta&#x27;, &#x27;Baltimore&#x27;, &#x27;Bangor&#x27;, &#x27;Beijing_Zang&#x27;, &#x27;Berlin_Margulies&#x27;, &#x27;Cambridge_Buckner&#x27;, &#x27;Cleveland&#x27;, &#x27;ICBM&#x27;, &#x27;Leiden_2180&#x27;, &#x27;Leiden_2200&#x27;, &#x27;Milwaukee_b&#x27;, &#x27;Munchen&#x27;, &#x27;NewYork_a&#x27;, &#x27;NewYork_a_ADHD&#x27;, &#x27;Newark&#x27;, &#x27;Oulu&#x27;, &#x27;Oxford&#x27;, &#x27;PaloAlto&#x27;, &#x27;Pittsburgh&#x27;, &#x27;Queensland&#x27;, &#x27;SaintLouis&#x27;]}</dd><dt><span>batch_effect_counts :</span></dt><dd>defaultdict(&lt;function NormData.register_batch_effects.&lt;locals&gt;.&lt;lambda&gt; at 0x7f11a09f79c0&gt;, {np.str_(&#x27;sex&#x27;): {&#x27;M&#x27;: 489, &#x27;F&#x27;: 589}, np.str_(&#x27;site&#x27;): {&#x27;AnnArbor_a&#x27;: 24, &#x27;AnnArbor_b&#x27;: 32, &#x27;Atlanta&#x27;: 28, &#x27;Baltimore&#x27;: 23, &#x27;Bangor&#x27;: 20, &#x27;Beijing_Zang&#x27;: 198, &#x27;Berlin_Margulies&#x27;: 26, &#x27;Cambridge_Buckner&#x27;: 198, &#x27;Cleveland&#x27;: 31, &#x27;ICBM&#x27;: 85, &#x27;Leiden_2180&#x27;: 12, &#x27;Leiden_2200&#x27;: 19, &#x27;Milwaukee_b&#x27;: 46, &#x27;Munchen&#x27;: 15, &#x27;NewYork_a&#x27;: 83, &#x27;NewYork_a_ADHD&#x27;: 25, &#x27;Newark&#x27;: 19, &#x27;Oulu&#x27;: 102, &#x27;Oxford&#x27;: 22, &#x27;PaloAlto&#x27;: 17, &#x27;Pittsburgh&#x27;: 3, &#x27;Queensland&#x27;: 19, &#x27;SaintLouis&#x27;: 31}})</dd><dt><span>covariate_ranges :</span></dt><dd>{np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 85.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 803895.003258, &#x27;max&#x27;: 2213930.77819}}</dd><dt><span>batch_effect_covariate_ranges :</span></dt><dd>{np.str_(&#x27;sex&#x27;): {&#x27;M&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 9.21, &#x27;max&#x27;: 78.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 803895.003258, &#x27;max&#x27;: 2213930.77819}}, &#x27;F&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 85.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 854269.795819, &#x27;max&#x27;: 1839480.7792}}}, np.str_(&#x27;site&#x27;): {&#x27;AnnArbor_a&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 13.41, &#x27;max&#x27;: 40.98}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1239237.74772, &#x27;max&#x27;: 1797270.09178}}, &#x27;AnnArbor_b&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 19.0, &#x27;max&#x27;: 79.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1095961.96155, &#x27;max&#x27;: 1785422.9362}}, &#x27;Atlanta&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 22.0, &#x27;max&#x27;: 57.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 991144.994738, &#x27;max&#x27;: 1961041.2011400005}}, &#x27;Baltimore&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 40.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1277794.4776, &#x27;max&#x27;: 1858687.83646}}, &#x27;Bangor&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 19.0, &#x27;max&#x27;: 38.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1209177.6117399998, &#x27;max&#x27;: 1839143.13269}}, &#x27;Beijing_Zang&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 18.0, &#x27;max&#x27;: 26.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1002619.98087, &#x27;max&#x27;: 1869137.32932}}, &#x27;Berlin_Margulies&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 23.0, &#x27;max&#x27;: 44.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1283953.04581, &#x27;max&#x27;: 2034930.18739}}, &#x27;Cambridge_Buckner&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 18.0, &#x27;max&#x27;: 30.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1226746.2365, &#x27;max&#x27;: 1987477.49695}}, &#x27;Cleveland&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 24.0, &#x27;max&#x27;: 60.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1195065.98729, &#x27;max&#x27;: 1727397.1725}}, &#x27;ICBM&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 19.0, &#x27;max&#x27;: 85.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1315469.72766, &#x27;max&#x27;: 2156696.50099}}, &#x27;Leiden_2180&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 27.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1508119.55881, &#x27;max&#x27;: 1968074.24155}}, &#x27;Leiden_2200&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 18.0, &#x27;max&#x27;: 28.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1309818.45623, &#x27;max&#x27;: 1868150.79879}}, &#x27;Milwaukee_b&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 44.0, &#x27;max&#x27;: 65.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 961761.166078, &#x27;max&#x27;: 1749317.40938}}, &#x27;Munchen&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 63.0, &#x27;max&#x27;: 74.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1205099.3215, &#x27;max&#x27;: 1807706.83688}}, &#x27;NewYork_a&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 49.16}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 945590.839808, &#x27;max&#x27;: 1980091.79537}}, &#x27;NewYork_a_ADHD&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.69, &#x27;max&#x27;: 50.9}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1182852.33915, &#x27;max&#x27;: 1836931.72887}}, &#x27;Newark&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 21.0, &#x27;max&#x27;: 39.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 803895.003258, &#x27;max&#x27;: 1483045.87846}}, &#x27;Oulu&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 23.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1038404.46752, &#x27;max&#x27;: 1807616.45732}}, &#x27;Oxford&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 35.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 989444.241903, &#x27;max&#x27;: 1689557.92241}}, &#x27;PaloAlto&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 22.0, &#x27;max&#x27;: 46.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 854269.795819, &#x27;max&#x27;: 1673520.84453}}, &#x27;Pittsburgh&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 25.0, &#x27;max&#x27;: 47.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 823904.532171, &#x27;max&#x27;: 1026186.09328}}, &#x27;Queensland&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 34.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1335132.49541, &#x27;max&#x27;: 1845048.33956}}, &#x27;SaintLouis&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 21.0, &#x27;max&#x27;: 29.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1374160.52253, &#x27;max&#x27;: 2213930.77819}}}}</dd></dl></div></li></ul></div></div>
+           [483826.46936402],
+           [557239.33105649],
+           [489717.56761864],
+           [398158.94018062],
+           [535539.25352106],
+           [467906.89409231],
+           [445043.69926534],
+           [574866.14026909],
+           [584705.43862745],
+           [516876.66789068],
+           [488573.66643951],
+           [489720.7777097 ],
+           [456870.87459645],
+           [473729.53968049],
+           [536305.70777973],
+           [495828.92799329],
+           [512569.62837114],
+           [465313.73404639],
+           [563803.74797215],
+           [523097.67585873]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>statistics</span></div><div class='xr-var-dims'>(response_vars, statistic)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.6693 1.069 ... 0.9797 0.3136</div><input id='attrs-3673e255-154d-4cc3-a63d-699f4251357a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3673e255-154d-4cc3-a63d-699f4251357a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6bfc5aa9-074e-4513-80e3-793722aa29f5' class='xr-var-data-in' type='checkbox'><label for='data-6bfc5aa9-074e-4513-80e3-793722aa29f5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ 6.69326919e-01,  1.06923352e+00,  1.73853276e-01,
+             4.44782146e-02,  8.63320653e-01, -4.92605666e-01,
+             6.64758343e-01,  2.83439752e+04,  8.06247991e-01,
+             1.09447456e-50,  3.35241657e-01,  9.79712184e-01,
+             3.13628008e-01]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1b6e10a7-7f6f-4c0e-8125-7f977f699f62' class='xr-section-summary-in' type='checkbox' checked /><label for='section-1b6e10a7-7f6f-4c0e-8125-7f977f699f62' class='xr-section-summary' title='Expand/collapse section'>Attributes: <span>(7)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>real_ids :</span></dt><dd>False</dd><dt><span>is_scaled :</span></dt><dd>False</dd><dt><span>name :</span></dt><dd>fcon1000_test</dd><dt><span>unique_batch_effects :</span></dt><dd>{np.str_(&#x27;sex&#x27;): [&#x27;M&#x27;, &#x27;F&#x27;], np.str_(&#x27;site&#x27;): [&#x27;AnnArbor_a&#x27;, &#x27;AnnArbor_b&#x27;, &#x27;Atlanta&#x27;, &#x27;Baltimore&#x27;, &#x27;Bangor&#x27;, &#x27;Beijing_Zang&#x27;, &#x27;Berlin_Margulies&#x27;, &#x27;Cambridge_Buckner&#x27;, &#x27;Cleveland&#x27;, &#x27;ICBM&#x27;, &#x27;Leiden_2180&#x27;, &#x27;Leiden_2200&#x27;, &#x27;Milwaukee_b&#x27;, &#x27;Munchen&#x27;, &#x27;NewYork_a&#x27;, &#x27;NewYork_a_ADHD&#x27;, &#x27;Newark&#x27;, &#x27;Oulu&#x27;, &#x27;Oxford&#x27;, &#x27;PaloAlto&#x27;, &#x27;Pittsburgh&#x27;, &#x27;Queensland&#x27;, &#x27;SaintLouis&#x27;]}</dd><dt><span>batch_effect_counts :</span></dt><dd>defaultdict(&lt;function NormData.register_batch_effects.&lt;locals&gt;.&lt;lambda&gt; at 0x7f54d098eca0&gt;, {np.str_(&#x27;sex&#x27;): {&#x27;M&#x27;: 489, &#x27;F&#x27;: 589}, np.str_(&#x27;site&#x27;): {&#x27;AnnArbor_a&#x27;: 24, &#x27;AnnArbor_b&#x27;: 32, &#x27;Atlanta&#x27;: 28, &#x27;Baltimore&#x27;: 23, &#x27;Bangor&#x27;: 20, &#x27;Beijing_Zang&#x27;: 198, &#x27;Berlin_Margulies&#x27;: 26, &#x27;Cambridge_Buckner&#x27;: 198, &#x27;Cleveland&#x27;: 31, &#x27;ICBM&#x27;: 85, &#x27;Leiden_2180&#x27;: 12, &#x27;Leiden_2200&#x27;: 19, &#x27;Milwaukee_b&#x27;: 46, &#x27;Munchen&#x27;: 15, &#x27;NewYork_a&#x27;: 83, &#x27;NewYork_a_ADHD&#x27;: 25, &#x27;Newark&#x27;: 19, &#x27;Oulu&#x27;: 102, &#x27;Oxford&#x27;: 22, &#x27;PaloAlto&#x27;: 17, &#x27;Pittsburgh&#x27;: 3, &#x27;Queensland&#x27;: 19, &#x27;SaintLouis&#x27;: 31}})</dd><dt><span>covariate_ranges :</span></dt><dd>{np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 85.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 803895.003258, &#x27;max&#x27;: 2213930.77819}}</dd><dt><span>batch_effect_covariate_ranges :</span></dt><dd>{np.str_(&#x27;sex&#x27;): {&#x27;M&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 9.21, &#x27;max&#x27;: 78.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 803895.003258, &#x27;max&#x27;: 2213930.77819}}, &#x27;F&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 85.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 854269.795819, &#x27;max&#x27;: 1839480.7792}}}, np.str_(&#x27;site&#x27;): {&#x27;AnnArbor_a&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 13.41, &#x27;max&#x27;: 40.98}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1239237.74772, &#x27;max&#x27;: 1797270.09178}}, &#x27;AnnArbor_b&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 19.0, &#x27;max&#x27;: 79.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1095961.96155, &#x27;max&#x27;: 1785422.9362}}, &#x27;Atlanta&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 22.0, &#x27;max&#x27;: 57.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 991144.994738, &#x27;max&#x27;: 1961041.2011400005}}, &#x27;Baltimore&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 40.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1277794.4776, &#x27;max&#x27;: 1858687.83646}}, &#x27;Bangor&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 19.0, &#x27;max&#x27;: 38.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1209177.6117399998, &#x27;max&#x27;: 1839143.13269}}, &#x27;Beijing_Zang&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 18.0, &#x27;max&#x27;: 26.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1002619.98087, &#x27;max&#x27;: 1869137.32932}}, &#x27;Berlin_Margulies&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 23.0, &#x27;max&#x27;: 44.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1283953.04581, &#x27;max&#x27;: 2034930.18739}}, &#x27;Cambridge_Buckner&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 18.0, &#x27;max&#x27;: 30.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1226746.2365, &#x27;max&#x27;: 1987477.49695}}, &#x27;Cleveland&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 24.0, &#x27;max&#x27;: 60.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1195065.98729, &#x27;max&#x27;: 1727397.1725}}, &#x27;ICBM&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 19.0, &#x27;max&#x27;: 85.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1315469.72766, &#x27;max&#x27;: 2156696.50099}}, &#x27;Leiden_2180&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 27.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1508119.55881, &#x27;max&#x27;: 1968074.24155}}, &#x27;Leiden_2200&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 18.0, &#x27;max&#x27;: 28.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1309818.45623, &#x27;max&#x27;: 1868150.79879}}, &#x27;Milwaukee_b&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 44.0, &#x27;max&#x27;: 65.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 961761.166078, &#x27;max&#x27;: 1749317.40938}}, &#x27;Munchen&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 63.0, &#x27;max&#x27;: 74.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1205099.3215, &#x27;max&#x27;: 1807706.83688}}, &#x27;NewYork_a&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 7.88, &#x27;max&#x27;: 49.16}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 945590.839808, &#x27;max&#x27;: 1980091.79537}}, &#x27;NewYork_a_ADHD&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.69, &#x27;max&#x27;: 50.9}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1182852.33915, &#x27;max&#x27;: 1836931.72887}}, &#x27;Newark&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 21.0, &#x27;max&#x27;: 39.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 803895.003258, &#x27;max&#x27;: 1483045.87846}}, &#x27;Oulu&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 23.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1038404.46752, &#x27;max&#x27;: 1807616.45732}}, &#x27;Oxford&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 35.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 989444.241903, &#x27;max&#x27;: 1689557.92241}}, &#x27;PaloAlto&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 22.0, &#x27;max&#x27;: 46.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 854269.795819, &#x27;max&#x27;: 1673520.84453}}, &#x27;Pittsburgh&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 25.0, &#x27;max&#x27;: 47.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 823904.532171, &#x27;max&#x27;: 1026186.09328}}, &#x27;Queensland&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 20.0, &#x27;max&#x27;: 34.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1335132.49541, &#x27;max&#x27;: 1845048.33956}}, &#x27;SaintLouis&#x27;: {np.str_(&#x27;age&#x27;): {&#x27;min&#x27;: 21.0, &#x27;max&#x27;: 29.0}, np.str_(&#x27;EstimatedTotalIntraCranialVol&#x27;): {&#x27;min&#x27;: 1374160.52253, &#x27;max&#x27;: 2213930.77819}}}}</dd></dl></div></li></ul></div></div>
 
 
 
@@ -1334,7 +1138,7 @@
         show_legend=False,
         plt_kwargs={"figsize": (4, 3)},
     )
-    
+
 
 
 

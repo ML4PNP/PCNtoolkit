@@ -350,7 +350,7 @@ Let’s start with the centiles.
 
 .. code:: text
 
-    [<Figure size 800x550 with 1 Axes>]
+    [<Figure size 640x480 with 1 Axes>]
 
 
 
@@ -369,7 +369,7 @@ Now let’s see the qq plots
 
 .. code:: text
 
-    [<Figure size 800x550 with 1 Axes>]
+    [<Figure size 640x480 with 1 Axes>]
 
 
 
@@ -396,19 +396,19 @@ And finally the ridge plot:
 
 .. code:: text
 
-    c:\Users\kontsi\AppData\Local\anaconda3\envs\.ptk-dev\Lib\site-packages\seaborn\axisgrid.py:123: UserWarning: Tight layout not applied. tight_layout cannot make Axes height small enough to accommodate all Axes decorations.
+    /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/seaborn/axisgrid.py:123: UserWarning: Tight layout not applied. tight_layout cannot make Axes height small enough to accommodate all Axes decorations.
       self._figure.tight_layout(*args, **kwargs)
-    c:\Users\kontsi\AppData\Local\anaconda3\envs\.ptk-dev\Lib\site-packages\seaborn\axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
+    /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/seaborn/axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
       self._figure.tight_layout(*args, **kwargs)
-    c:\Users\kontsi\AppData\Local\anaconda3\envs\.ptk-dev\Lib\site-packages\seaborn\axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
+    /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/seaborn/axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
       self._figure.tight_layout(*args, **kwargs)
-    c:\Users\kontsi\AppData\Local\anaconda3\envs\.ptk-dev\Lib\site-packages\seaborn\axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
+    /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/seaborn/axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
       self._figure.tight_layout(*args, **kwargs)
-    c:\Users\kontsi\AppData\Local\anaconda3\envs\.ptk-dev\Lib\site-packages\seaborn\axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
+    /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/seaborn/axisgrid.py:123: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
       self._figure.tight_layout(*args, **kwargs)
-    C:\Users\kontsi\Documents\GitHub\PCNtoolkit-local\pcntoolkit\util\plotter.py:1094: UserWarning: Tight layout not applied. tight_layout cannot make Axes height small enough to accommodate all Axes decorations.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/plotter.py:1097: UserWarning: Tight layout not applied. tight_layout cannot make Axes height small enough to accommodate all Axes decorations.
       g.figure.tight_layout()
-    
+
 
 
 .. image:: 05_HBR_Beta_files/05_HBR_Beta_22_1.png
@@ -485,19 +485,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.007586</td>
-          <td>1.957312</td>
-          <td>0.077396</td>
-          <td>0.343329</td>
-          <td>-1.986152</td>
-          <td>-0.756936</td>
-          <td>-0.000303</td>
-          <td>816.831496</td>
-          <td>0.515899</td>
-          <td>8.535184e-60</td>
-          <td>1.000303</td>
-          <td>0.971484</td>
-          <td>0.464116</td>
+          <td>0.008465</td>
+          <td>1.987571</td>
+          <td>0.076723</td>
+          <td>0.343354</td>
+          <td>-1.985777</td>
+          <td>-0.75656</td>
+          <td>0.00035</td>
+          <td>816.564759</td>
+          <td>0.51638</td>
+          <td>6.376991e-60</td>
+          <td>0.99965</td>
+          <td>0.971056</td>
+          <td>0.465338</td>
         </tr>
       </tbody>
     </table>
@@ -559,19 +559,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>-0.473211</td>
-          <td>0.344382</td>
+          <td>-0.466835</td>
+          <td>0.335379</td>
           <td>0.165538</td>
-          <td>0.384979</td>
-          <td>-1.914898</td>
-          <td>-0.386012</td>
-          <td>-0.505126</td>
-          <td>742.520087</td>
-          <td>0.466093</td>
-          <td>4.773968e-13</td>
-          <td>1.505126</td>
-          <td>0.994015</td>
-          <td>0.228566</td>
+          <td>0.384531</td>
+          <td>-1.915675</td>
+          <td>-0.38679</td>
+          <td>-0.498668</td>
+          <td>740.925306</td>
+          <td>0.468081</td>
+          <td>3.687598e-13</td>
+          <td>1.498668</td>
+          <td>0.994219</td>
+          <td>0.220998</td>
         </tr>
       </tbody>
     </table>
@@ -584,12 +584,12 @@ What’s next?
 Now we have a normative hierarchical Bayesian regression model, we can
 use it to:
 
-- Make predictions on new data
-- Harmonize data, this means that we ‘remove’ the batch effects from the
-  data, by simulating what the data would have looked like if all data
-  was from the same batch.
-- Synthesize new data
-- Extend the model using data from new batches
+-  Make predictions on new data
+-  Harmonize data, this means that we ‘remove’ the batch effects from
+   the data, by simulating what the data would have looked like if all
+   data was from the same batch.
+-  Synthesize new data
+-  Extend the model using data from new batches
 
 Predicting
 ~~~~~~~~~~

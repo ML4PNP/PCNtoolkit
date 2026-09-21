@@ -360,7 +360,7 @@ Let’s start with the centiles.
 
 .. code:: text
 
-    [<Figure size 800x550 with 1 Axes>]
+    [<Figure size 640x480 with 1 Axes>]
 
 
 
@@ -379,7 +379,7 @@ Now let’s see the qq plots
 
 .. code:: text
 
-    [<Figure size 800x550 with 1 Axes>]
+    [<Figure size 640x480 with 1 Axes>]
 
 
 
@@ -460,19 +460,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.354625</td>
-          <td>5.910348</td>
-          <td>0.087678</td>
-          <td>0.308367</td>
-          <td>0.871006</td>
-          <td>-0.547932</td>
-          <td>0.354623</td>
-          <td>656.104842</td>
-          <td>0.50446</td>
-          <td>7.723401e-57</td>
-          <td>0.645377</td>
-          <td>0.87945</td>
-          <td>1.803624</td>
+          <td>0.358735</td>
+          <td>5.849009</td>
+          <td>0.086025</td>
+          <td>0.308463</td>
+          <td>0.872205</td>
+          <td>-0.546734</td>
+          <td>0.35873</td>
+          <td>654.013868</td>
+          <td>0.503342</td>
+          <td>1.481759e-56</td>
+          <td>0.64127</td>
+          <td>0.880103</td>
+          <td>1.795659</td>
         </tr>
       </tbody>
     </table>
@@ -534,19 +534,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.368105</td>
-          <td>1.293957</td>
-          <td>0.161827</td>
-          <td>0.341647</td>
-          <td>0.796115</td>
-          <td>-0.323154</td>
-          <td>0.365075</td>
-          <td>482.262081</td>
-          <td>0.493969</td>
-          <td>1.091451e-14</td>
-          <td>0.634925</td>
-          <td>0.962756</td>
-          <td>0.817352</td>
+          <td>0.373326</td>
+          <td>1.209007</td>
+          <td>0.162304</td>
+          <td>0.341151</td>
+          <td>0.789217</td>
+          <td>-0.330052</td>
+          <td>0.370601</td>
+          <td>480.158535</td>
+          <td>0.494403</td>
+          <td>1.026346e-14</td>
+          <td>0.629399</td>
+          <td>0.964616</td>
+          <td>0.790129</td>
         </tr>
       </tbody>
     </table>
@@ -559,12 +559,12 @@ What’s next?
 Now we have a normative hierarchical Bayesian regression model, we can
 use it to:
 
-- Make predictions on new data
-- Harmonize data, this means that we ‘remove’ the batch effects from the
-  data, by simulating what the data would have looked like if all data
-  was from the same batch.
-- Synthesize new data
-- Extend the model using data from new batches
+-  Make predictions on new data
+-  Harmonize data, this means that we ‘remove’ the batch effects from
+   the data, by simulating what the data would have looked like if all
+   data was from the same batch.
+-  Synthesize new data
+-  Extend the model using data from new batches
 
 Predicting
 ~~~~~~~~~~

@@ -156,10 +156,10 @@ Part 1: Train a model at each remote location
 Each remote location trains its own normative model independently,
 without sharing any data. Crucially, the two model types are different:
 
-- **Location 1** uses an ``HBR`` (PCNtoolkit defaults: Normal
-  likelihood, B-spline basis for μ and σ, random intercept for μ).
-- **Location 2** uses a ``BLR`` with a non-linear warp applied to the
-  response variable, allowing it to capture non-Gaussian distributions.
+-  **Location 1** uses an ``HBR`` (PCNtoolkit defaults: Normal
+   likelihood, B-spline basis for μ and σ, random intercept for μ).
+-  **Location 2** uses a ``BLR`` with a non-linear warp applied to the
+   response variable, allowing it to capture non-Gaussian distributions.
 
 Train the Location 1 model (HBR)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -168,7 +168,7 @@ Train the Location 1 model (HBR)
 
     location1_model = NormativeModel(HBR(progressbar=False), save_dir="../out/models/location1_model")
     location1_model.fit_predict(location1_train, location1_test);
-    
+
 
 Train the Location 2 model (BLR)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,6 +256,15 @@ first model in the list, the merged model here will be an ``HBR``.
     # Load the model from disk (could also use the model that we just fitted, but this just shows that you can easily load and merge two models)
     fitted_location1_model = NormativeModel.load(location1_model.save_dir)
     fitted_location2_model = NormativeModel.load(location2_model.save_dir)
+
+
+.. code:: text
+
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 3181 - 2026-09-21 12:18:55 - This model was saved with PCNtoolkit v1.3.0, but you are running v1.3.0. Loading this model in v1.3.0...
+      warnings.warn(message, category)
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 3181 - 2026-09-21 12:18:55 - This model was saved with PCNtoolkit v1.3.0, but you are running v1.3.0. Loading this model in v1.3.0...
+      warnings.warn(message, category)
+
 
 .. code:: ipython3
 

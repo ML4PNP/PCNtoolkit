@@ -92,7 +92,14 @@ def fitted_norm_blr_model(
 
 
 # ------------------------------------------------------------------ #
-# Synthetic-data builders and the function-scoped fixtures wrapping them
+# Build repeated-measures data (sub_id + visit) for longitudinal tests.
+
+# Two schemas, deliberately kept separate:
+#   make_longitudinal_* / make_predicted_*  -> age/site/sex/metric_a; simple
+#       hand-written frames for validation tests, no model involved
+#   make_blr_*                              -> covariate_0/batch_effect_0/...
+#       matches norm_data_from_arrays, so it lines up with
+#       fitted_norm_blr_model
 # ------------------------------------------------------------------ #
 
 
@@ -315,6 +322,9 @@ class BatchEffectModel:
         "sex": {"F": 30, "M": 35},
     }
 
+# ------------------------------------------------------------------ #
+# Function-scoped fixtures for longitudinal test data.
+# ------------------------------------------------------------------ #
 
 @pytest.fixture
 def longitudinal_dataframe() -> pd.DataFrame:

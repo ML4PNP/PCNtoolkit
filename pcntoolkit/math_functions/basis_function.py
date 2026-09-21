@@ -190,6 +190,11 @@ class BsplineBasisFunction(BasisFunction):
         If True, prepend the original covariate to the B-spline design matrix.
         This reproduces the behavior of earlier PCNtoolkit versions and may
         introduce a redundant column.
+
+    Raises
+    ------
+    ValueError
+        If ``knot_method`` is not ``"uniform"`` or ``"quantile"``.
     """
 
     def __init__(
@@ -205,6 +210,11 @@ class BsplineBasisFunction(BasisFunction):
         **kwargs,
     ):
         super().__init__(basis_column, **kwargs)
+        if knot_method not in ("uniform", "quantile"):
+            raise ValueError(
+                f"Unknown knot_method '{knot_method}'. "
+                "Supported methods are 'uniform' and 'quantile'."
+            )
         self.degree = degree
         self.nknots = nknots
         self.left_expand = left_expand
@@ -227,11 +237,6 @@ class BsplineBasisFunction(BasisFunction):
             knots = np.linspace(aug_min, aug_max, self.nknots)
         elif self.knot_method == "quantile":
             knots = np.percentile(data, np.linspace(0, 100, self.nknots))
-        else:
-            raise ValueError(
-                f"Unknown knot_method '{self.knot_method}'. "
-                "Supported methods are 'uniform' and 'quantile'."
-            )
         knots = np.concatenate(
             [[aug_min] * self.degree, knots, [aug_max] * self.degree]
         )

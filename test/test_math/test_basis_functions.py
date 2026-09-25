@@ -1,6 +1,16 @@
+import importlib.metadata
+from unittest.mock import patch
+
+import numpy as np
 import pytest
 
-from pcntoolkit.math_functions.basis_function import create_basis_function
+from pcntoolkit.math_functions.basis_function import (
+    BasisFunction,
+    BsplineBasisFunction,
+    CompositeBasisFunction,
+    LinearBasisFunction,
+    create_basis_function,
+)
 from test.fixtures.norm_data_fixtures import *
 
 
@@ -78,3 +88,20 @@ def test_bspline_with_linear_term(norm_data_from_arrays, nknots, degree):
         norm_data_from_arrays.X.data.shape[0],
         basis_function.dimension + X.shape[1] - 1,
     )
+
+
+def test_composite_from_dict_passes_version_to_parts() -> None:
+    """Loading a saved composite basis must not migrate its parts as if they
+    were saved with v0.0.0 (the parts have no ptk_version of their own)."""
+    rng = np.random.default_rng(0)
+    X = rng.uniform(0, 1, size=(50, 2))
+    composite = CompositeBasisFunction(
+        [BsplineBasisFunction(basis_column=0), LinearBasisFunction(basis_column=1)]
+    )
+    composite.fit(X)
+
+    current_version = importlib.metadata.version("pcntoolkit")
+    with patch("pcntoolkit.util.migration.Output.warning") as mock_warning:
+        BasisFunction.from_dict(composite.to_dict(), version=current_version)
+
+    assert mock_warning.call_count == 0

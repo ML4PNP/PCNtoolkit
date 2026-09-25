@@ -52,6 +52,11 @@ class BasisFunction(ABC):
         # Apply any registered BasisFunction migrations for this version.
         my_dict = registry.migrate("BasisFunction", my_dict, version=version)
         basis_function_type = my_dict["basis_function"]
+        # The parts have no ptk_version of their own, so pass the model's
+        # version down; otherwise they are migrated as if saved with v0.0.0.
+        if basis_function_type in ["Composite", "CompositeBasis"]:
+            parts = [cls.from_dict(p, version=version) for p in my_dict["parts"]]
+            return CompositeBasisFunction(parts)
         basis_function = create_basis_function(basis_function_type, **my_dict)
         return basis_function
 
@@ -166,7 +171,7 @@ class BsplineBasisFunction(BasisFunction):
     setting ``include_linear=True``. Since linear functions are already
     contained in the span of the B-spline basis, including this term may
     introduce linear dependence and is primarily provided for backward
-    compatibility with models fitted using earlier PCNtoolkit versions. 
+    compatibility with models fitted using earlier PCNtoolkit versions.
     See `issue #542 <https://github.com/predictive-clinical-neuroscience/PCNtoolkit/issues/542>`_
 
 

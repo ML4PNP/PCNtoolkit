@@ -164,6 +164,36 @@ parameters yourself, using the ``make_prior`` function.
 
    mu = make_prior('mu', linear=True, basis_function=BSplineBasisFunction(degree=3, nknots=5), intercept = make_prior('intercept_mu', random=True))
 
+B-spline
+~~~~~~~~
+
+A ``BsplineBasisFunction`` has three parameters:
+
+- ``basis_column``: which column of the covariate matrix ``X`` to
+  expand, counted from 0. In this tutorial ``X`` holds a single
+  covariate, age, so ``basis_column=0`` picks age; the remaining columns
+  of ``X`` are copied through unchanged. Point it at the covariate whose
+  effect you expect to curve.
+- ``nknots``: how many knots to place. A knot is an x-value where two
+  polynomial pieces of the spline are stitched together; by default they
+  are spread evenly over the observed range of the covariate. More knots
+  give the curve more freedom to wiggle and follow the data, fewer knots
+  give a smoother curve that is cheaper to estimate. Increase ``nknots``
+  only when the effect really bends and your sample size can support the
+  extra parameters.
+- ``degree``: the polynomial order used between the knots. ``degree=1``
+  stitches straight segments, so the fitted curve has visible corners.
+  ``degree=3`` (the usual default) stitches cubic pieces, so both the
+  curve and its slope change smoothly.
+
+The expanded covariate takes up ``nknots + degree - 1`` columns, so
+``BsplineBasisFunction(degree=3, nknots=5)`` turns age into 7 columns.
+This is what a basis expansion means: one covariate is replaced by 7
+columns. Each column is a small bump that is high in one part of the age
+range and zero elsewhere. The prior puts a slope on each column, which
+scales its bump up or down, and the scaled bumps add up to one smooth
+nonlinear age effect.
+
 2. If your parameter is not a function of the covariates, you have to
    decide whether the parameter itself has a random effect or not.
    Here’s an example of a prior with a random effect.
@@ -235,6 +265,8 @@ NormalLikelihood, which we will use to model our response variable.
             sigma=make_prior(dist_name="Normal", dist_params=(0.0, 1.0))
         ),
         # We use a B-spline basis function to allow for non-linearity in the mean.
+        # basis_column=0 picks the covariate to expand (age here), and nknots=5 with
+        # degree=3 expands that single column into nknots + degree - 1 = 7 basis columns.
         basis_function=BsplineBasisFunction(basis_column=0, nknots=5, degree=3),
     )
     sigma = make_prior(
@@ -245,6 +277,7 @@ NormalLikelihood, which we will use to model our response variable.
         # The intercept is not random, because we assume the intercept of the variance to be the same for all sites and sexes.
         intercept=make_prior(dist_name="Normal", dist_params=(1.0, 1.0)),
         # We use a B-spline basis function to allow for non-linearity in the standard deviation.
+        # Again age (basis_column=0) is expanded into 7 basis columns.
         basis_function=BsplineBasisFunction(basis_column=0, nknots=5, degree=3),
         # We use a softplus mapping to ensure that sigma is strictly positive.
         mapping="softplus",

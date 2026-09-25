@@ -257,15 +257,6 @@ first model in the list, the merged model here will be an ``HBR``.
     fitted_location1_model = NormativeModel.load(location1_model.save_dir)
     fitted_location2_model = NormativeModel.load(location2_model.save_dir)
 
-
-.. code:: text
-
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 2925 - 2026-09-25 15:40:33 - This model was saved with PCNtoolkit v1.3.0, but you are running v1.3.0. Loading this model in v1.3.0...
-      warnings.warn(message, category)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 2925 - 2026-09-25 15:40:33 - This model was saved with PCNtoolkit v1.3.0, but you are running v1.3.0. Loading this model in v1.3.0...
-      warnings.warn(message, category)
-
-
 .. code:: ipython3
 
     # Merging is super duper easy

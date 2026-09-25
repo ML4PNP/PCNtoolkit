@@ -169,22 +169,22 @@ B-spline
 
 A ``BsplineBasisFunction`` has three parameters:
 
-- ``basis_column``: which column of the covariate matrix ``X`` to
-  expand, counted from 0. In this tutorial ``X`` holds a single
-  covariate, age, so ``basis_column=0`` picks age; the remaining columns
-  of ``X`` are copied through unchanged. Point it at the covariate whose
-  effect you expect to curve.
-- ``nknots``: how many knots to place. A knot is an x-value where two
-  polynomial pieces of the spline are stitched together; by default they
-  are spread evenly over the observed range of the covariate. More knots
-  give the curve more freedom to wiggle and follow the data, fewer knots
-  give a smoother curve that is cheaper to estimate. Increase ``nknots``
-  only when the effect really bends and your sample size can support the
-  extra parameters.
-- ``degree``: the polynomial order used between the knots. ``degree=1``
-  stitches straight segments, so the fitted curve has visible corners.
-  ``degree=3`` (the usual default) stitches cubic pieces, so both the
-  curve and its slope change smoothly.
+-  ``basis_column``: which column of the covariate matrix ``X`` to
+   expand, counted from 0. In this tutorial ``X`` holds a single
+   covariate, age, so ``basis_column=0`` picks age; the remaining
+   columns of ``X`` are copied through unchanged. Point it at the
+   covariate whose effect you expect to curve.
+-  ``nknots``: how many knots to place. A knot is an x-value where two
+   polynomial pieces of the spline are stitched together; by default
+   they are spread evenly over the observed range of the covariate. More
+   knots give the curve more freedom to wiggle and follow the data,
+   fewer knots give a smoother curve that is cheaper to estimate.
+   Increase ``nknots`` only when the effect really bends and your sample
+   size can support the extra parameters.
+-  ``degree``: the polynomial order used between the knots. ``degree=1``
+   stitches straight segments, so the fitted curve has visible corners.
+   ``degree=3`` (the usual default) stitches cubic pieces, so both the
+   curve and its slope change smoothly.
 
 The expanded covariate takes up ``nknots + degree - 1`` columns, so
 ``BsplineBasisFunction(degree=3, nknots=5)`` turns age into 7 columns.
@@ -493,19 +493,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.359369</td>
-          <td>5.855882</td>
-          <td>0.086181</td>
-          <td>0.308469</td>
-          <td>0.872206</td>
-          <td>-0.546732</td>
-          <td>0.359365</td>
-          <td>653.68988</td>
-          <td>0.503207</td>
-          <td>1.603034e-56</td>
-          <td>0.640635</td>
-          <td>0.879991</td>
-          <td>1.796889</td>
+          <td>0.359243</td>
+          <td>5.844206</td>
+          <td>0.086936</td>
+          <td>0.308771</td>
+          <td>0.872169</td>
+          <td>-0.54677</td>
+          <td>0.359242</td>
+          <td>653.752969</td>
+          <td>0.50329</td>
+          <td>1.526992e-56</td>
+          <td>0.640758</td>
+          <td>0.880239</td>
+          <td>1.794573</td>
         </tr>
       </tbody>
     </table>
@@ -567,19 +567,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.373008</td>
-          <td>1.205951</td>
+          <td>0.373257</td>
+          <td>1.208262</td>
           <td>0.16151</td>
-          <td>0.341278</td>
-          <td>0.789342</td>
-          <td>-0.329927</td>
-          <td>0.370285</td>
-          <td>480.279394</td>
-          <td>0.495272</td>
-          <td>9.069330e-15</td>
-          <td>0.629715</td>
-          <td>0.964737</td>
-          <td>0.78894</td>
+          <td>0.341457</td>
+          <td>0.789316</td>
+          <td>-0.329953</td>
+          <td>0.370419</td>
+          <td>480.228052</td>
+          <td>0.496079</td>
+          <td>8.084528e-15</td>
+          <td>0.629581</td>
+          <td>0.964724</td>
+          <td>0.788497</td>
         </tr>
       </tbody>
     </table>

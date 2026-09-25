@@ -517,19 +517,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.34833</td>
-          <td>1.183636</td>
-          <td>0.082672</td>
-          <td>0.320418</td>
-          <td>0.686993</td>
-          <td>-0.731945</td>
-          <td>0.347802</td>
-          <td>659.56301</td>
-          <td>0.486374</td>
-          <td>2.183845e-52</td>
-          <td>0.652198</td>
-          <td>0.986667</td>
-          <td>0.329359</td>
+          <td>0.348508</td>
+          <td>1.186211</td>
+          <td>0.082805</td>
+          <td>0.320443</td>
+          <td>0.687146</td>
+          <td>-0.731792</td>
+          <td>0.347983</td>
+          <td>659.471408</td>
+          <td>0.486244</td>
+          <td>2.345355e-52</td>
+          <td>0.652017</td>
+          <td>0.986646</td>
+          <td>0.329987</td>
         </tr>
       </tbody>
     </table>
@@ -591,19 +591,19 @@ Evaluation statistcs are stored in the NormData object:
       <tbody>
         <tr>
           <th>WM-hypointensities</th>
-          <td>0.394331</td>
-          <td>0.449519</td>
-          <td>0.180713</td>
-          <td>0.347025</td>
-          <td>0.747279</td>
-          <td>-0.37199</td>
-          <td>0.386621</td>
-          <td>474.008769</td>
-          <td>0.51314</td>
-          <td>6.604439e-16</td>
-          <td>0.613379</td>
-          <td>0.980416</td>
-          <td>-0.509107</td>
+          <td>0.394284</td>
+          <td>0.455546</td>
+          <td>0.18103</td>
+          <td>0.34707</td>
+          <td>0.747515</td>
+          <td>-0.371754</td>
+          <td>0.386611</td>
+          <td>474.012302</td>
+          <td>0.512433</td>
+          <td>7.347765e-16</td>
+          <td>0.613389</td>
+          <td>0.980354</td>
+          <td>-0.51028</td>
         </tr>
       </tbody>
     </table>

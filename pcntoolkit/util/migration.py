@@ -360,11 +360,11 @@ def _migrate_blr_slope_indices_1_4_0(d: dict) -> dict:
         if d.get(slope) and nonlinear and indices not in (None, [0]):
             raise NotImplementedError(
                 f"Cannot load this model: it uses {key}={indices} with a "
-                f"{basis_name}. Before PCNtoolkit v1.4.0, these indices counted the "
-                "columns made by the basis function (e.g. 1 = the first B-spline column). "
-                "From v1.4.0 they count the covariates (e.g. 1 = the second covariate). "
-                "Refit the model with PCNtoolkit v1.4.0 or "
-                "later, or load it with pcntoolkit<1.4.0."
+                f"{basis_name}. Before PCNtoolkit v1.4.0, these indices counted "
+                "the columns made by the basis function (e.g. 1 = the first "
+                "B-spline column). From v1.4.0 they count the covariates "
+                "(e.g. 1 = the second covariate). Refit the model with "
+                "PCNtoolkit v1.4.0 or later, or load it with pcntoolkit<1.4.0."
             )
 
     for key in ("fixed_effect_slope_indices", "fixed_effect_var_slope_indices"):

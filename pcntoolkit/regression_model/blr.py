@@ -1141,8 +1141,11 @@ def create_design_matrix(
         fixed_effect_slope_X = X
     if fixed_effect_slope_indices is None:
         fixed_effect_slope_indices = [0]
-    if fixed_effect_slope_indices == "all":
-        fixed_effect_slope_indices = range(slope_X.shape[1])
+    # isinstance, because indices loaded from a saved model are a numpy array
+    if isinstance(fixed_effect_slope_indices, str) and (
+        fixed_effect_slope_indices == "all"
+    ):
+        fixed_effect_slope_indices = range(fixed_effect_slope_X.shape[1])
 
     if fixed_effect_slope:
         for j in fixed_effect_slope_indices:

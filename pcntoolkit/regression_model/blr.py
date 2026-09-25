@@ -79,8 +79,8 @@ class BLR(RegressionModel):
         fixed_effect_slope_indices : list[int] | "all", optional
             If fixed_effect_slope is True, the indices of the covariates (before the
             basis expansion) for which to model a fixed effect in the slope of the mean.
-            By default this is [0], so a fixed effect is learned on the slope of the
-            first covariate (e.g. age). Set to "all" to model a fixed effect on the
+            By default (None) this is the covariate that `basis_function_mean` expands
+            (its `basis_column`, e.g. age). Set to "all" to model a fixed effect on the
             slopes of all covariates.
         heteroskedastic : bool, optional
             Whether to use heteroskedastic noise modeling, by default False
@@ -91,9 +91,9 @@ class BLR(RegressionModel):
         fixed_effect_var_slope_indices : list[int] | "all", optional
             If fixed_effect_var_slope is True, the indices of the covariates (before
             the basis expansion) for which to model a fixed effect in the slope of the
-            variance. By default this is [0], so a fixed effect is learned on the slope
-            of the first covariate (e.g. age). Set to "all" to model a fixed effect on
-            the slopes of all covariates.
+            variance. By default (None) this is the covariate that `basis_function_var`
+            expands (its `basis_column`, e.g. age). Set to "all" to model a fixed effect
+            on the slopes of all covariates.
         warp_name : str, optional
             Name of the warp function to use, by default None. Can be one of "WarpSinhArcsinh", "WarpLog", "WarpBoxCox", "WarpAffine", "WarpCompose"
         warp_reparam : bool, optional
@@ -886,7 +886,11 @@ class BLR(RegressionModel):
             intercept=True,
             fixed_effect=self.fixed_effect,
             fixed_effect_slope=self.fixed_effect_slope,
-            fixed_effect_slope_indices=self.fixed_effect_slope_indices,
+            fixed_effect_slope_indices=(
+                self.fixed_effect_slope_indices
+                if self.fixed_effect_slope_indices is not None
+                else default_slope_indices(self.basis_function_mean)
+            ),
             slope_X=X,
         )
 
@@ -901,7 +905,11 @@ class BLR(RegressionModel):
                 intercept=True,
                 fixed_effect=self.fixed_effect_var,
                 fixed_effect_slope=self.fixed_effect_var_slope,
-                fixed_effect_slope_indices=self.fixed_effect_var_slope_indices,
+                fixed_effect_slope_indices=(
+                    self.fixed_effect_var_slope_indices
+                    if self.fixed_effect_var_slope_indices is not None
+                    else default_slope_indices(self.basis_function_var)
+                ),
                 slope_X=X,
             )
         else:
@@ -1040,6 +1048,29 @@ class BLR(RegressionModel):
         return self.fixed_effect or self.fixed_effect_var
 
 
+def default_slope_indices(basis_function: BasisFunction) -> list[int]:
+    """Default covariate index for the batch effect slopes.
+
+    The slope goes on the covariate that the basis function expands (its
+    `basis_column`), e.g. age. Falls back to [0] when the basis function has no
+    single integer column (e.g. `CompositeBasisFunction`, or `None` from the CLI).
+
+    Parameters
+    ----------
+    basis_function : BasisFunction
+        The mean or variance basis function of the model.
+
+    Returns
+    -------
+    list[int]
+        A one-element list with the covariate index.
+    """
+    column = getattr(basis_function, "basis_column", None)
+    if isinstance(column, (int, np.integer)) and not isinstance(column, bool):
+        return [int(column)]
+    return [0]
+
+
 def create_design_matrix(
     X: np.ndarray,
     be: np.ndarray,
@@ -1071,7 +1102,8 @@ def create_design_matrix(
         Include fixed effect slope for batch effects.
     fixed_effect_slope_indices : list[int] | "all", default=None
         Indices of the covariates in `slope_X` that get a slope per batch effect.
-        None means [0]; "all" means every covariate.
+        None means [0]; "all" means every covariate. `BLR` replaces None with
+        `default_slope_indices(basis_function)` before calling this function.
     slope_X : np.ndarray | None, default=None
         Covariates before the basis expansion, shape (n_observations, n_covariates).
         The batch effect slopes are built from these columns, so that index 0 is

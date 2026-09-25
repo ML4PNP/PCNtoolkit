@@ -315,3 +315,29 @@ def _migrate_bspline_basis_function_1_4_0(d: dict) -> dict:
         d.setdefault("include_linear", True)
 
     return d
+
+
+@registry.register("BLR", introduced_in="1.4.0")
+def _migrate_blr_slope_indices_1_4_0(d: dict) -> dict:
+    """Keep the batch effect slopes of BLR models saved before v1.4.0 on covariate 0.
+
+    Before v1.4.0, `fixed_effect_slope_indices=None` (and the variance
+    counterpart) always meant `[0]`. From v1.4.0, None means the covariate
+    that the basis function expands (its `basis_column`). Setting `[0]`
+    explicitly keeps old models identical when that column is not 0.
+
+    Parameters
+    ----------
+    d : dict
+        Raw dict read from the saved JSON file.
+
+    Returns
+    -------
+    dict
+        Dict with explicit slope indices.
+    """
+    for key in ("fixed_effect_slope_indices", "fixed_effect_var_slope_indices"):
+        if d.get(key) is None:
+            d[key] = [0]
+
+    return d

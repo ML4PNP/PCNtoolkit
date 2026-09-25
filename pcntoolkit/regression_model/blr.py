@@ -77,7 +77,11 @@ class BLR(RegressionModel):
         fixed_effect_slope: bool, optional
             Whether to model a fixed effect in the slope of the mean, by default False
         fixed_effect_slope_indices : list[int] | "all", optional
-            If fixed_effect_slope is True, the indices of the columns in the design matrix for which to model a fixed effect in the slope ofthe mean. By default  this is [0], so a fixed effect is learned on the first column of the design matrix. Set to "all" to model a fixed effect on all columns of the design matrix.
+            If fixed_effect_slope is True, the indices of the covariates (before the
+            basis expansion) for which to model a fixed effect in the slope of the mean.
+            By default this is [0], so a fixed effect is learned on the slope of the
+            first covariate (e.g. age). Set to "all" to model a fixed effect on the
+            slopes of all covariates.
         heteroskedastic : bool, optional
             Whether to use heteroskedastic noise modeling, by default False
         fixed_effect_var : bool, optional
@@ -85,7 +89,11 @@ class BLR(RegressionModel):
         fixed_effect_var_slope : bool, optional
             Whether to model a fixed effect in the slope of the variance, by default False
         fixed_effect_var_slope_indices : list[int] | "all", optional
-            If fixed_effect_slope is True, the indices of the columns in the design matrix for which to model a fixed effect in the slope of the variance. By default  this is [0], so a fixed effect is learned on the first column of the design matrix. Set to "all" to model a fixed effect on all columns of the design matrix.
+            If fixed_effect_var_slope is True, the indices of the covariates (before
+            the basis expansion) for which to model a fixed effect in the slope of the
+            variance. By default this is [0], so a fixed effect is learned on the slope
+            of the first covariate (e.g. age). Set to "all" to model a fixed effect on
+            the slopes of all covariates.
         warp_name : str, optional
             Name of the warp function to use, by default None. Can be one of "WarpSinhArcsinh", "WarpLog", "WarpBoxCox", "WarpAffine", "WarpCompose"
         warp_reparam : bool, optional
@@ -879,6 +887,7 @@ class BLR(RegressionModel):
             fixed_effect=self.fixed_effect,
             fixed_effect_slope=self.fixed_effect_slope,
             fixed_effect_slope_indices=self.fixed_effect_slope_indices,
+            slope_X=X,
         )
 
         if self.models_variance:
@@ -893,6 +902,7 @@ class BLR(RegressionModel):
                 fixed_effect=self.fixed_effect_var,
                 fixed_effect_slope=self.fixed_effect_var_slope,
                 fixed_effect_slope_indices=self.fixed_effect_var_slope_indices,
+                slope_X=X,
             )
         else:
             Phi_var = np.zeros((Phi.shape[0], 1))
@@ -1039,21 +1049,34 @@ def create_design_matrix(
     fixed_effect: bool = False,
     fixed_effect_slope: bool = False,
     fixed_effect_slope_indices: list[int] | Literal["all"] = None,
+    slope_X: np.ndarray | None = None,
 ) -> np.ndarray:
     """Create design matrix for the model.
 
     Parameters
     ----------
-    data : NormData
-        Input data containing features and batch effects.
+    X : np.ndarray
+        Covariates after the basis expansion, shape (n_observations, n_basis_columns).
+    be : np.ndarray
+        Integer-coded batch effects, shape (n_observations, n_batch_effect_dims).
+    be_maps : dict[str, dict[str, int]]
+        Mapping from each batch effect dimension to its level codes.
     linear : bool, default=False
         Include linear terms in the design matrix.
     intercept : bool, default=False
         Include intercept term in the design matrix.
     fixed_effect : bool, default=False
         Include fixed effect intercept for batch effects.
-    fixef_effect_slope: bool, default=False
+    fixed_effect_slope : bool, default=False
         Include fixed effect slope for batch effects.
+    fixed_effect_slope_indices : list[int] | "all", default=None
+        Indices of the covariates in `slope_X` that get a slope per batch effect.
+        None means [0]; "all" means every covariate.
+    slope_X : np.ndarray | None, default=None
+        Covariates before the basis expansion, shape (n_observations, n_covariates).
+        The batch effect slopes are built from these columns, so that index 0 is
+        the first covariate (e.g. age) whatever the basis function. If None, `X`
+        is used.
 
     Returns
     -------
@@ -1079,17 +1102,20 @@ def create_design_matrix(
                 np.eye(len(v))[be[:, i]],
             )
 
-    # Create the slope fixed effect
+    # Create the slope fixed effect on the raw covariates, not the basis columns:
+    # with a B-spline basis, column 0 of X is a spline bump, not the covariate itself.
+    if slope_X is None:
+        slope_X = X
     if fixed_effect_slope_indices is None:
         fixed_effect_slope_indices = [0]
     if fixed_effect_slope_indices == "all":
-        fixed_effect_slope_indices = range(X.shape[1])
+        fixed_effect_slope_indices = range(slope_X.shape[1])
 
     if fixed_effect_slope:
         for j in fixed_effect_slope_indices:
             for i, v in enumerate(be_maps.values()):
                 acc.append(
-                    X[:, j][:, np.newaxis] * np.eye(len(v))[be[:, i]],
+                    slope_X[:, j][:, np.newaxis] * np.eye(len(v))[be[:, i]],
                 )
 
     if len(acc) == 0:

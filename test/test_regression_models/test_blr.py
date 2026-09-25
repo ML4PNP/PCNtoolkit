@@ -185,3 +185,20 @@ def test_migration_keeps_legacy_slope_on_covariate_0() -> None:
     d = registry.migrate("BLR", d, version="1.3.0")
     assert d["fixed_effect_slope_indices"] == [0]
     assert d["fixed_effect_var_slope_indices"] == [0]
+
+
+def test_migration_loads_model_when_slopes_are_off() -> None:
+    """Old models without per-site slopes load, whatever their slope indices.
+
+    The migration rejects old slope indices on a B-spline basis, e.g. [3],
+    because they changed meaning in v1.4.0. But with fixed_effect_slope=False
+    the indices are never used, so the model must still load.
+    """
+    d = {
+        "fixed_effect_slope": False,
+        "fixed_effect_slope_indices": [3],
+        "basis_function_mean": {"basis_function": "BsplineBasisFunction"},
+    }
+    # Pretend the model was saved with v1.3.0 so that the migration logic for pre-1.4.0 
+    # models is triggered.
+    registry.migrate("BLR", d, version="1.3.0")

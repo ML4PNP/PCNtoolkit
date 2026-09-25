@@ -326,6 +326,10 @@ def _migrate_blr_slope_indices_1_4_0(d: dict) -> dict:
     that the basis function expands (its `basis_column`). Setting `[0]`
     explicitly keeps old models identical when that column is not 0.
 
+    `fixed_effect_slope_indices` > 0 pointed at basis function columns before v1.4.0
+    and at covariates from v1.4.0 on. So indices other than None
+    or [0] are rejected from 1.4.0 onwards as they have a different meaning than before.
+
     Parameters
     ----------
     d : dict
@@ -335,7 +339,34 @@ def _migrate_blr_slope_indices_1_4_0(d: dict) -> dict:
     -------
     dict
         Dict with explicit slope indices.
+
+    Raises
+    ------
+    NotImplementedError
+        If a non-linear basis has slope indices other than None or [0].
     """
+    for slope, key, basis in (
+        ("fixed_effect_slope", "fixed_effect_slope_indices", "basis_function_mean"),
+        (
+            "fixed_effect_var_slope",
+            "fixed_effect_var_slope_indices",
+            "basis_function_var",
+        ),
+    ):
+        basis_name = (d.get(basis) or {}).get("basis_function")
+        indices = d.get(key)
+        # non linear are the Polynomial or Bspline basis functions
+        nonlinear = basis_name != "LinearBasisFunction"
+        if d.get(slope) and nonlinear and indices not in (None, [0]):
+            raise NotImplementedError(
+                f"Cannot load this model: it uses {key}={indices} with a "
+                f"{basis_name}. Before PCNtoolkit v1.4.0, these indices counted the "
+                "columns made by the basis function (e.g. 1 = the first B-spline column). "
+                "From v1.4.0 they count the covariates (e.g. 1 = the second covariate). "
+                "Refit the model with PCNtoolkit v1.4.0 or "
+                "later, or load it with pcntoolkit<1.4.0."
+            )
+
     for key in ("fixed_effect_slope_indices", "fixed_effect_var_slope_indices"):
         if d.get(key) is None:
             d[key] = [0]

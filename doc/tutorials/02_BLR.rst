@@ -83,8 +83,8 @@ right amygdala, a deep brain structure.
 
 .. code:: text
 
-    Process: 2617 - 2026-09-21 12:06:40 - Removed 0 NANs
-    Process: 2617 - 2026-09-21 12:06:40 - Dataset "fcon1000" created.
+    Process: 2389 - 2026-09-25 15:32:13 - Removed 0 NANs
+    Process: 2389 - 2026-09-25 15:32:13 - Dataset "fcon1000" created.
         - 1078 observations
         - 1078 unique subjects
         - 1 covariates
@@ -234,28 +234,28 @@ All results can be found in the save directory.
 
 .. code:: text
 
-    Process: 2617 - 2026-09-21 12:06:40 - Fitting models on 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:40 - Fitting model for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Making predictions on 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing z-scores for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing z-scores for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing centiles for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing centiles for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing log-probabilities for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing log-probabilities for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing log-probabilities for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing yhat for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing yhat for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Making predictions on 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing z-scores for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing z-scores for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing centiles for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing centiles for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing log-probabilities for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing log-probabilities for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing log-probabilities for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing yhat for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing yhat for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Fitting models on 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Fitting model for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Making predictions on 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing z-scores for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing z-scores for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing centiles for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing centiles for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing log-probabilities for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing log-probabilities for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing log-probabilities for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing yhat for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing yhat for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Making predictions on 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing z-scores for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing z-scores for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing centiles for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing centiles for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing log-probabilities for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing log-probabilities for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing log-probabilities for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing yhat for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing yhat for Right-Amygdala.
 
 
 Looking at the printed messages, we can identify three main steps:
@@ -286,7 +286,7 @@ Let’s start with the centiles plot:
 
 .. code:: text
 
-    Process: 2617 - 2026-09-21 12:06:41 - Dataset "centile" created.
+    Process: 2389 - 2026-09-25 15:32:14 - Dataset "centile" created.
         - 150 observations
         - 150 unique subjects
         - 1 covariates
@@ -295,10 +295,10 @@ Let’s start with the centiles plot:
         	sex (1)
     	site (1)
         
-    Process: 2617 - 2026-09-21 12:06:41 - Computing centiles for 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Computing centiles for Right-Amygdala.
-    Process: 2617 - 2026-09-21 12:06:41 - Harmonizing data on 1 response variables.
-    Process: 2617 - 2026-09-21 12:06:41 - Harmonizing data for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing centiles for 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Computing centiles for Right-Amygdala.
+    Process: 2389 - 2026-09-25 15:32:14 - Harmonizing data on 1 response variables.
+    Process: 2389 - 2026-09-25 15:32:14 - Harmonizing data for Right-Amygdala.
 
 
 
@@ -755,61 +755,41 @@ Fit the model
 
 .. code:: text
 
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337333484671e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 9.885815347623591e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 2617 - 2026-09-21 12:07:02 - Posterior estimation failed: 
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 2389 - 2026-09-25 15:32:33 - Posterior estimation failed: 
     Matrix is not positive definite. 
     The optimizer could not find a stable solution. Retrying optimization.
       warnings.warn(message, category)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 6.519009804042476e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.947575881606999e-39.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.126208140116319e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 8.945389378111529e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 6.519009872981996e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 7.05484846826294e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.6653372766960695e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 9.885815347623582e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337232738891e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 9.781386157475288e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337335746302e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 3.233693459325718e-45.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337333485648e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 4.160043458940329e-40.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337335854776e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 9.887479646027389e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.66533733583898e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 3.714840465537925e-46.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.66533733810903e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 7.107806070216863e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337307709077e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 1.1227180151555947e-44.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337320880936e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 9.885815347623526e-29.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337335856885e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337335604212e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 6.5190088896530425e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 2617 - 2026-09-21 12:07:03 - Posterior estimation failed: 
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/util/output.py:309: UserWarning: Process: 2389 - 2026-09-25 15:32:34 - Posterior estimation failed: 
     Matrix is not positive definite. 
     The optimizer could not find a stable solution. Retrying optimization.
       warnings.warn(message, category)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337333486164e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337333485106e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337335643725e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665338101072066e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.665337333485619e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.66533733348672e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 5.6653373334860585e-25.
-      invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
-    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:632: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 6.26116747357385e-25.
+    /home/runner/work/PCNtoolkit/PCNtoolkit/pcntoolkit/regression_model/blr.py:640: LinAlgWarning: An ill-conditioned matrix detected: slice 0 has rcond = 1.0925412456860193e-28.
       invAXt: np.ndarray = linalg.solve(self.A, X.T, check_finite=False)
 
 
@@ -928,19 +908,19 @@ the function call (see ``batch_effects`` keyword argument).
       <tbody>
         <tr>
           <th>Right-Amygdala</th>
-          <td>0.386859</td>
-          <td>-0.294636</td>
-          <td>0.095069</td>
-          <td>0.08712</td>
-          <td>1.178902</td>
-          <td>-0.240036</td>
-          <td>0.386677</td>
-          <td>191.871372</td>
-          <td>0.610173</td>
-          <td>4.769649e-89</td>
-          <td>0.613323</td>
-          <td>0.995668</td>
-          <td>0.162126</td>
+          <td>0.396814</td>
+          <td>-0.234987</td>
+          <td>0.093566</td>
+          <td>0.086449</td>
+          <td>1.173224</td>
+          <td>-0.245715</td>
+          <td>0.396811</td>
+          <td>190.27961</td>
+          <td>0.611902</td>
+          <td>1.115659e-89</td>
+          <td>0.603189</td>
+          <td>0.997733</td>
+          <td>0.115495</td>
         </tr>
       </tbody>
     </table>
@@ -1002,19 +982,19 @@ the function call (see ``batch_effects`` keyword argument).
       <tbody>
         <tr>
           <th>Right-Amygdala</th>
-          <td>0.283958</td>
-          <td>-0.236708</td>
-          <td>0.152382</td>
-          <td>0.095046</td>
-          <td>1.25216</td>
-          <td>-0.129109</td>
-          <td>0.283595</td>
-          <td>199.703348</td>
-          <td>0.503964</td>
-          <td>2.584606e-15</td>
-          <td>0.716405</td>
-          <td>0.990494</td>
-          <td>0.188627</td>
+          <td>0.285102</td>
+          <td>-0.337598</td>
+          <td>0.143504</td>
+          <td>0.094148</td>
+          <td>1.244851</td>
+          <td>-0.136419</td>
+          <td>0.284633</td>
+          <td>199.55859</td>
+          <td>0.511902</td>
+          <td>7.958027e-16</td>
+          <td>0.715367</td>
+          <td>0.98873</td>
+          <td>0.189983</td>
         </tr>
       </tbody>
     </table>

@@ -891,7 +891,7 @@ class BLR(RegressionModel):
                 if self.fixed_effect_slope_indices is not None
                 else default_slope_indices(self.basis_function_mean)
             ),
-            slope_X=X,
+            fixed_effect_slope_X=X,
         )
 
         if self.models_variance:
@@ -910,7 +910,7 @@ class BLR(RegressionModel):
                     if self.fixed_effect_var_slope_indices is not None
                     else default_slope_indices(self.basis_function_var)
                 ),
-                slope_X=X,
+                fixed_effect_slope_X=X,
             )
         else:
             Phi_var = np.zeros((Phi.shape[0], 1))
@@ -1080,7 +1080,7 @@ def create_design_matrix(
     fixed_effect: bool = False,
     fixed_effect_slope: bool = False,
     fixed_effect_slope_indices: list[int] | Literal["all"] = None,
-    slope_X: np.ndarray | None = None,
+    fixed_effect_slope_X: np.ndarray | None = None,
 ) -> np.ndarray:
     """Create design matrix for the model.
 
@@ -1101,10 +1101,11 @@ def create_design_matrix(
     fixed_effect_slope : bool, default=False
         Include fixed effect slope for batch effects.
     fixed_effect_slope_indices : list[int] | "all", default=None
-        Indices of the covariates in `slope_X` that get a slope per batch effect.
+        Indices of the covariates in `fixed_effect_slope_X` that get a slope per
+        batch effect.
         None means [0]; "all" means every covariate. `BLR` replaces None with
         `default_slope_indices(basis_function)` before calling this function.
-    slope_X : np.ndarray | None, default=None
+    fixed_effect_slope_X : np.ndarray | None, default=None
         Covariates before the basis expansion, shape (n_observations, n_covariates).
         The batch effect slopes are built from these columns, so that index 0 is
         the first covariate (e.g. age) whatever the basis function. If None, `X`
@@ -1136,8 +1137,8 @@ def create_design_matrix(
 
     # Create the slope fixed effect on the raw covariates, not the basis columns:
     # with a B-spline basis, column 0 of X is a spline bump, not the covariate itself.
-    if slope_X is None:
-        slope_X = X
+    if fixed_effect_slope_X is None:
+        fixed_effect_slope_X = X
     if fixed_effect_slope_indices is None:
         fixed_effect_slope_indices = [0]
     if fixed_effect_slope_indices == "all":
@@ -1147,7 +1148,8 @@ def create_design_matrix(
         for j in fixed_effect_slope_indices:
             for i, v in enumerate(be_maps.values()):
                 acc.append(
-                    slope_X[:, j][:, np.newaxis] * np.eye(len(v))[be[:, i]],
+                    fixed_effect_slope_X[:, j][:, np.newaxis]
+                    * np.eye(len(v))[be[:, i]],
                 )
 
     if len(acc) == 0:

@@ -56,10 +56,15 @@ class BasisFunction(ABC):
         # The parts have no ptk_version of their own, so pass the model's
         # version down; otherwise they are migrated as if saved with v0.0.0.
         if basis_function_type in ["Composite", "CompositeBasis"]:
-            parts = [cls.from_dict(p, version=version) for p in my_dict["parts"]]
-            return CompositeBasisFunction(parts)
-        basis_function = create_basis_function(basis_function_type, **my_dict)
-        return basis_function
+            parts = [
+                cls.from_dict(p, version=version)
+                for p in my_dict["parts"]
+            ]
+            return CompositeBasisFunction(
+                parts,
+                interactions=my_dict.get("interactions"),
+            )
+        return create_basis_function(basis_function_type, **my_dict)
 
     @classmethod
     def from_args(cls, name: str, args: dict) -> BasisFunction:

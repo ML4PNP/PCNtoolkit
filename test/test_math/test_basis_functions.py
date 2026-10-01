@@ -10,8 +10,6 @@ from pcntoolkit.math_functions.basis_function import (
     CompositeBasisFunction,
     LinearBasisFunction,
     create_basis_function,
-)
-    create_basis_function,
     CompositeBasisFunction,
     LinearBasisFunction,
     BsplineBasisFunction,

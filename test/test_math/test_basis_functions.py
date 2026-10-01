@@ -10,11 +10,7 @@ from pcntoolkit.math_functions.basis_function import (
     CompositeBasisFunction,
     LinearBasisFunction,
     create_basis_function,
-    CompositeBasisFunction,
-    LinearBasisFunction,
-    BsplineBasisFunction,
 )
-
 from test.fixtures.norm_data_fixtures import *
 
 
